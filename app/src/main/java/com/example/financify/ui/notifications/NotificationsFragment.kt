@@ -1,5 +1,6 @@
 package com.example.financify.ui.notifications
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,13 @@ class NotificationsFragment : Fragment() {
         notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val fab: View = binding.fab
+        fab.setOnClickListener { view ->
+            val intent = Intent(requireActivity(), StockSearch::class.java)
+            startActivity(intent)
+        }
+
         return root
     }
 
