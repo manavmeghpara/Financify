@@ -1,0 +1,36 @@
+<!-- res/layout/activity_expense_list.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly Expenses"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <!-- Expense List -->
+    <ListView
+        android:id="@+id/expenseListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/black"
+        android:dividerHeight="0.5dp"/>
+
+    <!-- Add Expense Button -->
+    <Button
+        android:id="@+id/addExpenseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Expense"/>
+
+</LinearLayout>
