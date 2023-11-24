@@ -22,8 +22,8 @@ class CategoryViewModel(private val repository: CategoryRepository) : ViewModel(
         return repository.getCategoryByName(categoryName)
     }
 
-    fun deleteCategory(categoryName: String) {
-        repository.deleteCategory(categoryName)
+    fun deleteCategory(categoryId: Long) {
+        repository.deleteCategory(categoryId)
     }
 }
 

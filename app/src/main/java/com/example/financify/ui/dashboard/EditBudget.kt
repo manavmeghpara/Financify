@@ -16,11 +16,9 @@ import androidx.lifecycle.ViewModelProvider
 
 
 class EditBudget : AppCompatActivity() {
-
     private lateinit var budgetListView: ListView
     private lateinit var addCategoryButton: Button
     private lateinit var saveBudgetButton: Button
-    private lateinit var cancelBudgetButton: Button
     private lateinit var categoryAdapter: CategoryAdapter
 
     private lateinit var database: BudgetDatabase
@@ -35,7 +33,6 @@ class EditBudget : AppCompatActivity() {
         budgetListView = findViewById(R.id.budgetListView)
         addCategoryButton = findViewById(R.id.addCategoryButton)
         saveBudgetButton = findViewById(R.id.saveBudgetButton)
-        cancelBudgetButton = findViewById(R.id.cancelBudgetButton)
 
         database = BudgetDatabase.getDatabase(this)
         databaseDao = database.categoryDao()
@@ -43,13 +40,11 @@ class EditBudget : AppCompatActivity() {
         viewModelFactory = CategoryViewModelFactory(repository)
         categoryViewModel = ViewModelProvider(this, viewModelFactory)[CategoryViewModel::class.java]
 
+        // Initialize empty adapter while waiting for
         categoryAdapter = CategoryAdapter(this, mutableListOf())
-
-        // Observe the LiveData from the ViewModel
         categoryViewModel.allCategoriesLiveData.observe(this, Observer { categories ->
             categoryAdapter.updateData(categories)
         })
-
         budgetListView.adapter = categoryAdapter
 
         budgetListView.setOnItemClickListener { _, _, position, _ ->
@@ -61,11 +56,6 @@ class EditBudget : AppCompatActivity() {
         }
 
         saveBudgetButton.setOnClickListener {
-            // TODO: Save budget to database
-            finish()
-        }
-
-        cancelBudgetButton.setOnClickListener {
             finish()
         }
     }
@@ -90,20 +80,16 @@ class EditBudget : AppCompatActivity() {
 
             // Validate input and add the category
             if (categoryName.isNotEmpty() && categoryAmount.isNotEmpty()) {
-                // Check if the category name is unique before adding
                 // TODO: Check if unique name
                 if (true) {
                     val newCategory = Category(name=categoryName, amount=categoryAmount.toInt())
                     categoryViewModel.insertCategory(newCategory)
                     dialog.dismiss()
                 } else {
-                    // Show an error message for non-unique category name
                     Toast.makeText(this, "Category name must be unique.", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                // Show an error message for empty inputs
                 Toast.makeText(this, "Category name and amount are required", Toast.LENGTH_SHORT).show()
-
             }
         }
     }
@@ -149,18 +135,10 @@ class EditBudget : AppCompatActivity() {
 
         deleteCategoryDialogButton.setOnClickListener {
             // Delete the category
-            categoryAdapter.remove(currentCategory)
-            categoryAdapter.notifyDataSetChanged()
+            if (currentCategory != null) {
+                categoryViewModel.deleteCategory(currentCategory.id)
+            }
             dialog.dismiss()
-        }
-    }
-
-    private fun parseCategory(category: String?): Pair<String, String> {
-        val parts = category?.split(": $") ?: emptyList()
-        return if (parts.size == 2) {
-            Pair(parts[0], parts[1])
-        } else {
-            Pair("", "")
         }
     }
 }
