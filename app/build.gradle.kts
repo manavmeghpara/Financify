@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -53,6 +55,16 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation ("io.finnhub:kotlin-client:2.0.20")
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("com.google.code.gson:gson:2.8.5")
+    implementation ("com.github.travijuu:numberpicker:1.0.7")
+
+    val room_version = "2.6.0"
+    val lifecycle_version = "2.6.2"
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx: $lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <EditText
@@ -19,10 +20,60 @@
         android:layout_below="@id/editTextSymbol"
         android:text="Search"/>
 
-
-    <TextView
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textStock"
-        android:layout_below="@+id/buttonSearch"/>
+        android:layout_below="@id/buttonSearch"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <com.github.mikephil.charting.charts.CandleStickChart
+        android:id="@+id/stockChart"
+        android:layout_below="@id/buttonSearch"
+        android:layout_width="500dp"
+        android:layout_height="400dp" />
+
+
+    <com.travijuu.numberpicker.library.NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_below="@id/stockChart"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        numberpicker:min="0"
+        numberpicker:max="10"
+        numberpicker:value="-5"
+        numberpicker:unit="1"
+        numberpicker:focusable="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="0"
+        android:id="@+id/parentLayout"
+        android:layout_below="@id/number_picker">
+        <Button
+            android:id="@+id/save_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:text="Save"
+            />
+
+        <Button
+            android:id="@+id/cancel_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:text="Cancel"
+            />
+    </LinearLayout>
+
+
+
 </RelativeLayout>
