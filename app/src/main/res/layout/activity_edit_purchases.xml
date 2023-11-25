@@ -11,26 +11,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Monthly Expenses"
+        android:text="Purchase History"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
-    <!-- Expense List -->
     <ListView
-        android:id="@+id/expenseListView"
+        android:id="@+id/purchaseListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp"/>
 
-    <!-- Add Expense Button -->
     <Button
-        android:id="@+id/addExpenseButton"
+        android:id="@+id/addPurchaseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Monthly Expense"/>
+        android:text="Add a Purchase"/>
 
     <LinearLayout
         android:layout_width="match_parent"

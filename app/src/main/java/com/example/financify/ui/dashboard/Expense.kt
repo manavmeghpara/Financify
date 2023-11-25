@@ -20,7 +20,7 @@ data class Expense(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
 
-    // Foreign key referencing the id column in Category table
+    // Foreign key referencing the category table
     var categoryName: String,
 
     var name: String,
