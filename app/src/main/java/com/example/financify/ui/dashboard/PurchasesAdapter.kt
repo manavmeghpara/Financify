@@ -20,17 +20,19 @@ class PurchasesAdapter(
 
         val text1: TextView = view.findViewById(android.R.id.text1)
         val text2: TextView = view.findViewById(android.R.id.text2)
+        val amountText: TextView = view.findViewById(R.id.amountTextView)
         val dateText: TextView = view.findViewById(R.id.dateTextView)
 
 
         val date = getItem(position)?.dateTime
-        val dateFormat = SimpleDateFormat("d. MMM", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("MMM. d", Locale.getDefault())
         var formattedDate = ""
         if (date != null) {
             formattedDate = dateFormat.format(date.time)
         }
 
-        text1.text = "${getItem(position)?.name}: $${getItem(position)?.amount}"
+        text1.text = "${getItem(position)?.name}"
+        amountText.text = "$${getItem(position)?.amount}"
         text2.text = "${getItem(position)?.categoryName}"
         dateText.text = "${formattedDate}"
 
