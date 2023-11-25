@@ -45,6 +45,11 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+        var button: Button = root.findViewById(R.id.launch_budget)
+        button.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditBudget::class.java)
+            startActivity(intent)
+        }
         return root
     }
 

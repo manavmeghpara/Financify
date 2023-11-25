@@ -68,7 +68,7 @@ class StocksFragment : Fragment() {
 
         listView.adapter = stkAdaptor
         stocksViewModel.stockList.observe(requireActivity(), Observer {it ->
-            stkAdaptor = StockAdapter(requireContext(), it)
+            stkAdaptor = StockAdapter(root.context, it)
             listView.adapter = stkAdaptor
             stkAdaptor.notifyDataSetChanged()
         })

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
     id("kotlin-kapt")
 
 }
@@ -60,6 +61,7 @@ dependencies {
     implementation ("com.github.travijuu:numberpicker:1.0.7")
     implementation("androidx.transition:transition-ktx:1.4.1")
 
+    // Room components
     val room_version = "2.6.0"
     val lifecycle_version = "2.6.2"
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx: $lifecycle_version")
