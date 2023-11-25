@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:text="Add Category"/>
 
-    <!-- Save and Cancel Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
