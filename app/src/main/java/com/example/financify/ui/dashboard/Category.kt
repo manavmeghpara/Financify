@@ -5,10 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "categories")
 data class Category(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0L,
-
+    @PrimaryKey(autoGenerate = false)
     var name: String,
-
     var amount: Int
 )

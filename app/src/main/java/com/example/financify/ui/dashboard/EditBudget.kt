@@ -112,6 +112,8 @@ class EditBudget : AppCompatActivity() {
             editCategoryAmountEditText.setText(categoryAmount.toString())
         }
 
+        editCategoryNameEditText.isEnabled = false
+
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle("Edit Category")
@@ -136,7 +138,7 @@ class EditBudget : AppCompatActivity() {
         deleteCategoryDialogButton.setOnClickListener {
             // Delete the category
             if (currentCategory != null) {
-                categoryViewModel.deleteCategory(currentCategory.id)
+                categoryViewModel.deleteCategory(currentCategory.name)
             }
             dialog.dismiss()
         }

@@ -27,6 +27,12 @@
             android:name=".ui.dashboard.EditBudget"
             android:exported="false" />
         <activity
+            android:name=".ui.dashboard.EditExpenses"
+            android:exported="false" />
+        <activity
+            android:name=".ui.dashboard.EditPurchases"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">

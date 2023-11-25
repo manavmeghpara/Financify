@@ -31,13 +31,33 @@
         app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
 
     <Button
+        android:id="@+id/launch_expenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="92dp"
+        android:text="Launch expenses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+
+    <Button
+        android:id="@+id/launch_purchases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="156dp"
+        android:text="Launch purchases (TODO)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+
+    <Button
         android:id="@+id/savings_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:text="Savings"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="46dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/menu_budget"
