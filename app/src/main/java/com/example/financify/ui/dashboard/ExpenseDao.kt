@@ -19,7 +19,7 @@ interface ExpenseDao {
     @Update
     suspend fun updateExpense(expense: Expense)
 
-    @Query("SELECT * FROM expenses")
+    @Query("SELECT * FROM expenses ORDER BY categoryName")
     fun getAllExpenses(): Flow<List<Expense>>
 
     @Query("DELETE FROM expenses WHERE id = :expenseId")
