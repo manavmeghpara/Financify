@@ -38,7 +38,7 @@ abstract class BudgetDatabase : RoomDatabase() {
                 })
                 .fallbackToDestructiveMigration().build()
 
-        val PREPOPULATE_CATEGORIES = listOf(Category(id=1, name="Rent", amount=1200), Category(id=2, name="Entertainment", amount=100))
-        val PREPOPULATE_EXPENSES = listOf(Expense(categoryId=1, name="Rent Payment", amount=1000), Expense(categoryId=2, name="Netflix subscription", amount=20))
+        val PREPOPULATE_CATEGORIES = listOf(Category(name="Rent", amount=1200), Category(name="Entertainment", amount=100))
+        val PREPOPULATE_EXPENSES = listOf(Expense(categoryName="Rent", name="Rent Payment", amount=1000), Expense(categoryName="Entertainment", name="Netflix subscription", amount=20))
     }
 }

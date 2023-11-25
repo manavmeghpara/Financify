@@ -9,10 +9,10 @@ import android.widget.TextView
 class ExpensesAdapter(
     context: Context,
     private val categories: MutableList<Expense>
-) : ArrayAdapter<Expense>(context, android.R.layout.simple_list_item_1, categories) {
+) : ArrayAdapter<Expense>(context, android.R.layout.simple_list_item_2, categories) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
+        val view = convertView ?: LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent, false)
 
         val categoryNameTextView: TextView = view.findViewById(android.R.id.text1)
 

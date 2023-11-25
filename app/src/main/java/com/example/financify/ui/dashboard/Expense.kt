@@ -9,8 +9,8 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = Category::class,
-            parentColumns = ["id"],
-            childColumns = ["categoryId"],
+            parentColumns = ["name"],
+            childColumns = ["categoryName"],
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE
         )
@@ -21,7 +21,7 @@ data class Expense(
     var id: Long = 0L,
 
     // Foreign key referencing the id column in Category table
-    var categoryId: Long,
+    var categoryName: String,
 
     var name: String,
 
