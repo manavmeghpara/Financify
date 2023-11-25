@@ -58,6 +58,7 @@ dependencies {
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.google.code.gson:gson:2.8.5")
     implementation ("com.github.travijuu:numberpicker:1.0.7")
+    implementation("androidx.transition:transition-ktx:1.4.1")
 
     val room_version = "2.6.0"
     val lifecycle_version = "2.6.2"

@@ -2,11 +2,13 @@ package com.example.financify.ui.stocks
 
 import android.graphics.Color
 import android.graphics.Paint
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +26,7 @@ import com.github.mikephil.charting.data.CandleData
 import com.github.mikephil.charting.data.CandleDataSet
 import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.Quote
 import io.finnhub.api.models.StockCandles
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +46,8 @@ class StockViewActivity : AppCompatActivity() {
     private lateinit var prevCloseTextView: TextView
     private lateinit var changeTextView: TextView
     private lateinit var percentTextView: TextView
+    private lateinit var stockHeading: TextView
+
 
     private var stockSymbol: String? = null
     private lateinit var loadingProgressBar: ProgressBar
@@ -65,6 +70,7 @@ class StockViewActivity : AppCompatActivity() {
         prevCloseTextView = findViewById(R.id.textViewPreviousClosePrice)
         changeTextView = findViewById(R.id.textViewChange)
         percentTextView = findViewById(R.id.textViewPercentChange)
+        stockHeading = findViewById(R.id.stockHeading)
 
         loadingProgressBar = findViewById(R.id.loading)
 
@@ -77,6 +83,13 @@ class StockViewActivity : AppCompatActivity() {
 
         stockSymbol = intent?.getStringExtra(StocksFragment.STOCK_VIEW_KEY)
         if (stockSymbol != null) {
+            GlobalScope.launch(Dispatchers.Main) {
+                val description = fetchStockDescription(stockSymbol!!)
+                description?.let {
+                    if(description.name != null){
+                        stockHeading.text = description.name + "(" +description.ticker+ ")"
+                    }}
+            }
             // Use coroutines to fetch and visualize stock data
             GlobalScope.launch(Dispatchers.Main) {
                 val stockData = fetchStockData(stockSymbol!!)
@@ -113,6 +126,12 @@ class StockViewActivity : AppCompatActivity() {
     private suspend fun fetchData(symbol: String): Quote? {
         return withContext(Dispatchers.IO) {
             StockApiService.stockData(symbol)
+        }
+    }
+
+    private suspend fun fetchStockDescription(symbol: String): CompanyProfile2 {
+        return withContext(Dispatchers.IO) {
+            StockApiService.getStockDescription(symbol)
         }
     }
 

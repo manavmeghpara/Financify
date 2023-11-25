@@ -2,6 +2,8 @@ package com.example.financify.ui.stocks
 
 import io.finnhub.api.apis.DefaultApi
 import io.finnhub.api.infrastructure.ApiClient
+import io.finnhub.api.models.CompanyProfile
+import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.Quote
 import io.finnhub.api.models.StockCandles
 import java.util.Calendar
@@ -25,5 +27,9 @@ object StockApiService {
 
     fun stockData(symbol: String): Quote{
         return apiClient.quote(symbol)
+    }
+
+    fun getStockDescription(symbol:String): CompanyProfile2 {
+        return apiClient.companyProfile2(symbol, null, null)
     }
 }

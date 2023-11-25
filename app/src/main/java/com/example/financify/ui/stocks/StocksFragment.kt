@@ -3,6 +3,7 @@ package com.example.financify.ui.stocks
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -66,7 +68,7 @@ class StocksFragment : Fragment() {
 
         listView.adapter = stkAdaptor
         stocksViewModel.stockList.observe(requireActivity(), Observer {it ->
-            stkAdaptor = StockAdapter(requireActivity(), it)
+            stkAdaptor = StockAdapter(requireContext(), it)
             listView.adapter = stkAdaptor
             stkAdaptor.notifyDataSetChanged()
         })
@@ -74,7 +76,10 @@ class StocksFragment : Fragment() {
         listView.setOnItemClickListener{parent, view, pos, id->
             val intent = Intent(requireContext(), StockViewActivity::class.java)
             intent.putExtra(STOCK_VIEW_KEY, stocksViewModel.stockList.value?.get(pos)?.symbol)
-            startActivity(intent)
+            val a : FragmentActivity? = activity
+            startActivity(intent);
+            a!!.overridePendingTransition(R.anim.slide_up,  R.anim.slide_down )
+
         }
 
         val fab: View = binding.fab
