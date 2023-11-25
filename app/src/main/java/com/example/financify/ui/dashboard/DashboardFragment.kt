@@ -2,11 +2,17 @@ package com.example.financify.ui.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.R
@@ -50,11 +56,22 @@ class DashboardFragment : Fragment() {
             val intent = Intent(requireActivity(), EditBudget::class.java)
             startActivity(intent)
         }
+//  menu pop-up button
+        val menu_btn: Button = root.findViewById(R.id.menu_budget)
+        // Initializing the popup menu and giving the reference as current context
+        menu_btn.setOnClickListener(){
+            val popupMenu: PopupMenu = PopupMenu(requireActivity(), it, Gravity.FILL_VERTICAL)
+            val inflater: MenuInflater = popupMenu.menuInflater
+            inflater.inflate(R.menu.popup_menu, popupMenu.menu)
+            popupMenu.show()
+        }
+
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

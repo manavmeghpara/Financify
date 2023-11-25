@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/savings_goal"
+        android:title="Saving goals" />
+
+    <item
+        android:id="@+id/recurring_bills"
+        android:title="Recurring bills" />
+
+</menu>
