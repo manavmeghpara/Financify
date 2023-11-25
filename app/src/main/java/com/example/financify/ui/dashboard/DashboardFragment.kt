@@ -50,6 +50,16 @@ class DashboardFragment : Fragment() {
             val intent = Intent(requireActivity(), EditBudget::class.java)
             startActivity(intent)
         }
+        var expenseButton: Button = root.findViewById(R.id.launch_expenses)
+        expenseButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditExpenses::class.java)
+            startActivity(intent)
+        }
+        var purchaseButton: Button = root.findViewById(R.id.launch_purchases)
+        purchaseButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditPurchases::class.java)
+            startActivity(intent)
+        }
         return root
     }
 

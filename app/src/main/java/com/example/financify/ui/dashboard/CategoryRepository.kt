@@ -24,9 +24,9 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
         return categoryDao.getCategoryByName(categoryName)
     }
 
-    fun deleteCategory(categoryId: Long) {
+    fun deleteCategory(categoryName: String) {
         CoroutineScope(IO).launch {
-            categoryDao.deleteCategory(categoryId)
+            categoryDao.deleteCategory(categoryName)
         }
     }
 }

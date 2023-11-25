@@ -8,12 +8,11 @@ import com.example.financify.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
-
-class EditExpenses : AppCompatActivity() {
-    private lateinit var expenseListView: ListView
-    private lateinit var addExpenseButton: Button
+class EditPurchases : AppCompatActivity() {
+    private lateinit var purchaseListView: ListView
+    private lateinit var addPurchaseButton: Button
     private lateinit var finishButton: Button
-    private lateinit var expenseAdapter: ExpensesAdapter
+    private lateinit var purchaseAdapter: PurchasesAdapter
 
     private lateinit var database: BudgetDatabase
 
@@ -22,16 +21,16 @@ class EditExpenses : AppCompatActivity() {
     private lateinit var categoryViewModelFactory: CategoryViewModelFactory
     private lateinit var categoryViewModel: CategoryViewModel
 
-    private lateinit var expenseDao: ExpenseDao
-    private lateinit var expenseRepository: ExpenseRepository
-    private lateinit var expenseViewModelFactory: ExpenseViewModelFactory
-    private lateinit var expenseViewModel: ExpenseViewModel
+    private lateinit var purchaseDao: PurchaseDao
+    private lateinit var purchaseRepository: PurchaseRepository
+    private lateinit var purchaseViewModelFactory: PurchaseViewModelFactory
+    private lateinit var purchaseViewModel: PurchaseViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_expenses)
+        setContentView(R.layout.activity_edit_purchases)
 
-        expenseListView = findViewById(R.id.expenseListView)
-        addExpenseButton = findViewById(R.id.addExpenseButton)
+        purchaseListView = findViewById(R.id.purchaseListView)
+        addPurchaseButton = findViewById(R.id.addPurchaseButton)
         finishButton = findViewById(R.id.finishButton)
 
         database = BudgetDatabase.getDatabase(this)
@@ -41,19 +40,19 @@ class EditExpenses : AppCompatActivity() {
         categoryViewModelFactory = CategoryViewModelFactory(categoryRepository)
         categoryViewModel = ViewModelProvider(this, categoryViewModelFactory)[CategoryViewModel::class.java]
 
-        expenseDao = database.expenseDao()
-        expenseRepository = ExpenseRepository(expenseDao)
-        expenseViewModelFactory = ExpenseViewModelFactory(expenseRepository)
-        expenseViewModel = ViewModelProvider(this, expenseViewModelFactory)[ExpenseViewModel::class.java]
+        purchaseDao = database.purchaseDao()
+        purchaseRepository = PurchaseRepository(purchaseDao)
+        purchaseViewModelFactory = PurchaseViewModelFactory(purchaseRepository)
+        purchaseViewModel = ViewModelProvider(this, purchaseViewModelFactory)[PurchaseViewModel::class.java]
 
         // Initialize empty adapter while waiting for DB
-        expenseAdapter = ExpensesAdapter(this, mutableListOf())
-        expenseViewModel.allExpensesLiveData.observe(this, Observer { expenses ->
-            expenseAdapter.updateData(expenses)
+        purchaseAdapter = PurchasesAdapter(this, mutableListOf())
+        purchaseViewModel.allPurchasesLiveData.observe(this, Observer { purchases ->
+            purchaseAdapter.updateData(purchases)
         })
-        expenseListView.adapter = expenseAdapter
+        purchaseListView.adapter = purchaseAdapter
 
-        // TODO: Add/edit expenses
+        // TODO: Add/edit purchases
 //        expenseListView.setOnItemClickListener { _, _, position, _ ->
 //            showEditExpenseDialog(position)
 //        }
