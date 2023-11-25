@@ -55,18 +55,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // Room components
-    val room_version = "2.6.0"
-    val lifecycle_version = "2.6.2"
-    implementation("androidx.room:room-ktx:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx: $lifecycle_version")
-
     implementation ("io.finnhub:kotlin-client:2.0.20")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.google.code.gson:gson:2.8.5")
     implementation ("com.github.travijuu:numberpicker:1.0.7")
 
+    // Room components
     val room_version = "2.6.0"
     val lifecycle_version = "2.6.2"
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx: $lifecycle_version")
