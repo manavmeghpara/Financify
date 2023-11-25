@@ -19,7 +19,7 @@ abstract class StockDatabase : RoomDatabase(){
                 var instance = dbInstance
                 if(instance == null){
                     instance = Room.databaseBuilder(context.applicationContext,
-                        StockDatabase::class.java, "manual_entry_data")
+                        StockDatabase::class.java, "stock_data")
                         .build()
                     dbInstance = instance
                 }
