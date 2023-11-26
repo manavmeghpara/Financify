@@ -14,6 +14,7 @@ import com.example.financify.databinding.FragmentDashboardBinding
 import com.example.financify.ui.savings.SavingActivity
 import com.example.financify.ui.stocks.StockViewActivity
 import com.example.financify.ui.stocks.StocksFragment
+import com.example.financify.ui.visualization.VisualizeActivity
 
 class DashboardFragment : Fragment() {
 
@@ -58,6 +59,11 @@ class DashboardFragment : Fragment() {
         var purchaseButton: Button = root.findViewById(R.id.launch_purchases)
         purchaseButton.setOnClickListener() {
             val intent = Intent(requireActivity(), EditPurchases::class.java)
+            startActivity(intent)
+        }
+        var visualizationButton: Button = root.findViewById(R.id.launch_visualization)
+        visualizationButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), VisualizeActivity::class.java)
             startActivity(intent)
         }
         return root
