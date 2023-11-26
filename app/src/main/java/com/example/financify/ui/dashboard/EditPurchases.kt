@@ -35,7 +35,7 @@ class EditPurchases : AppCompatActivity() {
     private lateinit var purchaseViewModelFactory: PurchaseViewModelFactory
     private lateinit var purchaseViewModel: PurchaseViewModel
 
-    private lateinit var purchaseCategoryAdapter: ArrayAdapter<Category>
+    private lateinit var categoryAdapter: ArrayAdapter<Category>
 
     private lateinit var dateTime: Calendar
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,12 +66,12 @@ class EditPurchases : AppCompatActivity() {
         purchaseListView.adapter = purchaseAdapter
 
         // Set up the spinner adapter for dialogs
-        purchaseCategoryAdapter = ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item)
-        purchaseCategoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categoryAdapter = ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         categoryViewModel.allCategoriesLiveData.observe(this) { categories ->
-            purchaseCategoryAdapter.clear()
-            purchaseCategoryAdapter.addAll(categories)
-            purchaseCategoryAdapter.notifyDataSetChanged()
+            categoryAdapter.clear()
+            categoryAdapter.addAll(categories)
+            categoryAdapter.notifyDataSetChanged()
         }
 
         purchaseListView.setOnItemClickListener { _, _, position, _ ->
@@ -89,7 +89,7 @@ class EditPurchases : AppCompatActivity() {
 
     private fun showAddPurchaseDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_purchase, null)
-        val purchaseCategorySpinner: Spinner = dialogView.findViewById(R.id.purchaseCategorySpinner)
+        val categorySpinner: Spinner = dialogView.findViewById(R.id.purchaseCategorySpinner)
         val editPurchaseNameEditText: EditText = dialogView.findViewById(R.id.editPurchaseNameEditText)
         val editPurchaseAmountEditText: EditText = dialogView.findViewById(R.id.editPurchaseAmountEditText)
         val editPurchaseDateButton: Button = dialogView.findViewById(R.id.editPurchaseDateButton)
@@ -102,7 +102,7 @@ class EditPurchases : AppCompatActivity() {
             .setTitle("Add New Purchase")
         val dialog = dialogBuilder.show()
 
-        purchaseCategorySpinner.adapter = purchaseCategoryAdapter
+        categorySpinner.adapter = categoryAdapter
 
         dateTime = Calendar.getInstance()
         editPurchaseDateButton.setOnClickListener {
@@ -112,14 +112,14 @@ class EditPurchases : AppCompatActivity() {
         editPurchaseButton.setOnClickListener {
             var purchaseName = editPurchaseNameEditText.text.toString()
             val purchaseAmount = editPurchaseAmountEditText.text.toString()
-            val purchaseCategory = purchaseCategorySpinner.selectedItem.toString()
+            val purchaseCategory = categorySpinner.selectedItem.toString()
 
             // Validate input and add the purchase
             if (purchaseAmount.isNotEmpty()) {
                 if (purchaseName.isEmpty()) {
                     purchaseName = "Unnamed purchase"
                 }
-                val newPurchase = Purchase(categoryName=purchaseCategory, name=purchaseName, amount=purchaseAmount.toInt())
+                val newPurchase = Purchase(categoryName = purchaseCategory, name = purchaseName, amount = purchaseAmount.toInt(), dateTime = dateTime)
                 purchaseViewModel.insertPurchase(newPurchase)
                 dialog.dismiss()
             } else {
