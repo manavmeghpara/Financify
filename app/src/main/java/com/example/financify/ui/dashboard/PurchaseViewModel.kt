@@ -18,7 +18,7 @@ class PurchaseViewModel(private val repository: PurchaseRepository) : ViewModel(
         repository.updatePurchase(purchase)
     }
 
-    fun insertPurchase(purchaseId: Long) {
+    fun deletePurchase(purchaseId: Long) {
         repository.deletePurchase(purchaseId)
     }
 }

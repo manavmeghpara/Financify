@@ -74,10 +74,9 @@ class EditPurchases : AppCompatActivity() {
             purchaseCategoryAdapter.notifyDataSetChanged()
         }
 
-        // TODO: edit purchases
-//        expenseListView.setOnItemClickListener { _, _, position, _ ->
-//            showEditExpenseDialog(position)
-//        }
+        purchaseListView.setOnItemClickListener { _, _, position, _ ->
+            showDeletePurchaseDialog(position)
+        }
 
         addPurchaseButton.setOnClickListener {
             showAddPurchaseDialog()
@@ -127,6 +126,22 @@ class EditPurchases : AppCompatActivity() {
                 Toast.makeText(this, "Name and amount are required", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showDeletePurchaseDialog(position: Int) {
+        val currentPurchase = purchaseAdapter.getItem(position)
+
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Deletion")
+            .setMessage("Are you sure you want to delete the purchase '${currentPurchase?.name}' ?")
+            .setPositiveButton("Delete") { _, _ ->
+                if (currentPurchase != null) {
+                    purchaseViewModel.deletePurchase(currentPurchase.id)
+                }
+            }
+            .setNegativeButton("Cancel") { _, _ ->
+            }
+            .show()
     }
 
     private fun openDatePickerDialog() {
