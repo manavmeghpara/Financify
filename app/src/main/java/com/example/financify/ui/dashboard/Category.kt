@@ -7,5 +7,9 @@ import androidx.room.PrimaryKey
 data class Category(
     @PrimaryKey(autoGenerate = false)
     var name: String,
-    var amount: Int
-)
+    var amount: Int,
+) {
+    override fun toString(): String {
+        return name
+    }
+}
