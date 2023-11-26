@@ -56,6 +56,17 @@ class DashboardFragment : Fragment() {
             val intent = Intent(requireActivity(), EditBudget::class.java)
             startActivity(intent)
         }
+        var expensesButton: Button = root.findViewById(R.id.launch_expenses)
+        expensesButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditExpenses::class.java)
+            startActivity(intent)
+        }
+        var purchasesButton: Button = root.findViewById(R.id.launch_purchases)
+        purchasesButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditPurchases::class.java)
+            startActivity(intent)
+        }
+
 //  menu pop-up button
         val menu_btn: Button = root.findViewById(R.id.menu_budget)
         // Initializing the popup menu and giving the reference as current context
