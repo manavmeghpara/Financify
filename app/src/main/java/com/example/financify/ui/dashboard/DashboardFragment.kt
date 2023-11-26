@@ -5,14 +5,11 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.R
@@ -20,6 +17,7 @@ import com.example.financify.databinding.FragmentDashboardBinding
 import com.example.financify.ui.savings.SavingActivity
 import com.example.financify.ui.stocks.StockViewActivity
 import com.example.financify.ui.stocks.StocksFragment
+import com.example.financify.ui.visualization.VisualizeActivity
 
 class DashboardFragment : Fragment() {
 
@@ -56,18 +54,22 @@ class DashboardFragment : Fragment() {
             val intent = Intent(requireActivity(), EditBudget::class.java)
             startActivity(intent)
         }
-        var expensesButton: Button = root.findViewById(R.id.launch_expenses)
-        expensesButton.setOnClickListener() {
+        var expenseButton: Button = root.findViewById(R.id.launch_expenses)
+        expenseButton.setOnClickListener() {
             val intent = Intent(requireActivity(), EditExpenses::class.java)
             startActivity(intent)
         }
-        var purchasesButton: Button = root.findViewById(R.id.launch_purchases)
-        purchasesButton.setOnClickListener() {
+        var purchaseButton: Button = root.findViewById(R.id.launch_purchases)
+        purchaseButton.setOnClickListener() {
             val intent = Intent(requireActivity(), EditPurchases::class.java)
             startActivity(intent)
         }
-
-//  menu pop-up button
+        var visualizationButton: Button = root.findViewById(R.id.launch_visualization)
+        visualizationButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), VisualizeActivity::class.java)
+            startActivity(intent)
+        }
+    //  menu pop-up button
         val menu_btn: Button = root.findViewById(R.id.menu_budget)
         // Initializing the popup menu and giving the reference as current context
         menu_btn.setOnClickListener(){
@@ -76,13 +78,11 @@ class DashboardFragment : Fragment() {
             inflater.inflate(R.menu.popup_menu, popupMenu.menu)
             popupMenu.show()
         }
-
         return root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Financify"
         tools:targetApi="31">
         <activity
+            android:name=".ui.visualization.VisualizeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.savings.SavingActivity"
             android:exported="false" />
         <activity
