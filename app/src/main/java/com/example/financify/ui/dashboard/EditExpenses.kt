@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.financify.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class EditExpenses : AppCompatActivity() {
@@ -72,10 +76,9 @@ class EditExpenses : AppCompatActivity() {
             categoryAdapter.notifyDataSetChanged()
         }
 
-        // TODO: Add/edit expenses
-//        expenseListView.setOnItemClickListener { _, _, position, _ ->
-//            showEditExpenseDialog(position)
-//        }
+        expenseListView.setOnItemClickListener { _, _, position, _ ->
+            showEditExpenseDialog(position)
+        }
 
         addExpenseButton.setOnClickListener {
             showAddExpenseDialog()
@@ -117,4 +120,67 @@ class EditExpenses : AppCompatActivity() {
             }
         }
     }
+
+    private fun showEditExpenseDialog(position: Int) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_expense, null)
+        val categorySpinner: Spinner = dialogView.findViewById(R.id.expenseCategorySpinner)
+        val editExpenseNameEditText: EditText = dialogView.findViewById(R.id.editExpenseNameEditText)
+        val editExpenseAmountEditText: EditText = dialogView.findViewById(R.id.editExpenseAmountEditText)
+        val editExpenseDialogButton: Button = dialogView.findViewById(R.id.editExpenseButton)
+        val deleteExpenseDialogButton: Button = dialogView.findViewById(R.id.deleteExpenseButton)
+
+        val currentExpense = expenseAdapter.getItem(position)
+        val expenseName = currentExpense?.name
+        val expenseAmount = currentExpense?.amount
+        val expenseCategoryName = currentExpense?.categoryName
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            if (expenseCategoryName != null) {
+                val expenseCategory = categoryViewModel.getCategoryByName(expenseCategoryName)
+
+                withContext(Dispatchers.Main) {
+                    val categoryPosition = categoryAdapter.getPosition(expenseCategory)
+                    categorySpinner.setSelection(categoryPosition)
+                }
+            }
+        }
+
+        editExpenseNameEditText.setText(expenseName)
+        if (expenseAmount != null) {
+            editExpenseAmountEditText.setText(expenseAmount.toString())
+        }
+        categorySpinner.adapter = categoryAdapter
+
+        editExpenseNameEditText.isEnabled = false
+
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setTitle("Edit Expense")
+
+        val dialog = dialogBuilder.show()
+
+        editExpenseDialogButton.setOnClickListener {
+            val newExpenseName = editExpenseNameEditText.text.toString()
+            val newExpenseAmount = editExpenseAmountEditText.text.toString()
+
+            if (newExpenseName.isNotEmpty() && newExpenseAmount.isNotEmpty()) {
+                if (currentExpense != null) {
+                    currentExpense.name = newExpenseName
+                    currentExpense.amount = newExpenseAmount.toInt()
+                    expenseViewModel.updateExpense(currentExpense)
+                }
+                dialog.dismiss()
+            }
+        }
+
+        deleteExpenseDialogButton.setOnClickListener {
+            // Delete the expense
+            if (currentExpense != null) {
+                expenseViewModel.deleteExpense(currentExpense.id)
+            }
+            dialog.dismiss()
+        }
+    }
+
 }
