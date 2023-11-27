@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.financify.ui.savings.savingsDB.GoalEntity
 import com.example.financify.ui.savings.savingsDB.GoalRepository
+import kotlinx.coroutines.launch
 
 class SavingsViewModel(private val repository: GoalRepository) : ViewModel() {
 
@@ -17,6 +19,15 @@ class SavingsViewModel(private val repository: GoalRepository) : ViewModel() {
     fun delete(key: String){
         repository.delete(key)
     }
+    fun UpdateGoal(originalGoal: GoalEntity, editedGoal: GoalEntity) {
+        viewModelScope.launch {
+            // Delete the original goal
+            repository.delete(originalGoal.name)
+
+            // Insert the edited goal
+            repository.insert(editedGoal)
+            }
+        }
 }
 
 class SavingsViewModelFactory (private val repository: GoalRepository): ViewModelProvider.Factory{
