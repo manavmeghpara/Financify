@@ -7,12 +7,14 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import com.example.financify.R
 import com.example.financify.ui.stocks.stockDB.StockEntity
 import com.github.mikephil.charting.charts.CandleStickChart
@@ -25,7 +27,9 @@ import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.gson.Gson
 import com.travijuu.numberpicker.library.NumberPicker
+import io.finnhub.api.infrastructure.RequestConfig
 import io.finnhub.api.models.StockCandles
+import io.finnhub.api.models.SymbolLookupInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -36,7 +40,7 @@ import java.util.TimeZone
 
 
 class StockSearch : AppCompatActivity() {
-    private lateinit var editTextSymbol: EditText
+    private lateinit var editTextSymbol: AutoCompleteTextView
     private lateinit var buttonSearch: Button
     private lateinit var saveBtn: Button
     private lateinit var cancelBtn: Button
@@ -63,6 +67,31 @@ class StockSearch : AppCompatActivity() {
         candleChart = findViewById(R.id.stockChart)
         candleChart.isVisible = false
         loadingProgressBar = findViewById(R.id.loadingProgressBar)
+
+        StockApiService.responseMutableLiveData.observe(this@StockSearch, Observer { it->
+            var list = ArrayList<String>()
+            for (i in it!!)
+                list.add(i)
+            val adapter: ArrayAdapter<String> =
+                ArrayAdapter<String>(
+                    applicationContext,
+                    android.R.layout.simple_list_item_1,
+                    list
+                )
+            editTextSymbol.threshold = 1
+            editTextSymbol.setAdapter(adapter)
+            adapter.notifyDataSetChanged()
+        })
+
+        editTextSymbol.addTextChangedListener{
+            val query = it.toString()
+            if (query.length >= 1) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    StockApiService.getAllRelatedStocks(query)
+                }
+
+            }
+        }
 
 
         buttonSearch.setOnClickListener {
@@ -118,6 +147,7 @@ class StockSearch : AppCompatActivity() {
             StockApiService.searchStock(symbol)
         }
     }
+
 
     private fun updateChart(candles: StockCandles) {
         hideLoadingView()

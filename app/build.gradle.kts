@@ -60,6 +60,7 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.5")
     implementation ("com.github.travijuu:numberpicker:1.0.7")
     implementation("androidx.transition:transition-ktx:1.4.1")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
     // Room components
     val room_version = "2.6.0"
