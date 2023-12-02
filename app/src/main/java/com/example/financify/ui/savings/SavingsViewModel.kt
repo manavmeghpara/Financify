@@ -19,15 +19,9 @@ class SavingsViewModel(private val repository: GoalRepository) : ViewModel() {
     fun delete(key: String){
         repository.delete(key)
     }
-    fun UpdateGoal(originalGoal: GoalEntity, editedGoal: GoalEntity) {
-        viewModelScope.launch {
-            // Delete the original goal
-            repository.delete(originalGoal.name)
-
-            // Insert the edited goal
-            repository.insert(editedGoal)
-            }
-        }
+    fun UpdateGoal(editedGoal: GoalEntity) {
+        repository.update(editedGoal)
+    }
 }
 
 class SavingsViewModelFactory (private val repository: GoalRepository): ViewModelProvider.Factory{

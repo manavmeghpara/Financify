@@ -115,8 +115,8 @@ class SavingActivity : AppCompatActivity() {
                 // Create a new GoalEntity with the edited values
                 val editedGoal = goal.copy(name = editedName, amount = editedAmount, progress = editedProgress)
 
-                // Call deleteAndInsert to delete the original goal and insert the edited one
-                savingsViewModel.UpdateGoal(goal, editedGoal)
+                // update
+                savingsViewModel.UpdateGoal(editedGoal)
             } catch (e: NumberFormatException) {
                 Toast.makeText(this, "Invalid input. Please enter numeric values.", Toast.LENGTH_SHORT).show()
             }

@@ -17,6 +17,12 @@ class GoalRepository(private val goalDao: GoalDao) {
         }
     }
 
+    fun update(goalEntity: GoalEntity){
+        CoroutineScope(Dispatchers.IO).launch {
+            goalDao.update(goalEntity)
+        }
+    }
+
     fun delete(key: String){
         CoroutineScope(Dispatchers.IO).launch {
             goalDao.deleteGoal(key)

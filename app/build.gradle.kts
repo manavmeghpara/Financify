@@ -61,6 +61,8 @@ dependencies {
     implementation ("com.github.travijuu:numberpicker:1.0.7")
     implementation("androidx.transition:transition-ktx:1.4.1")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("com.github.polygon-io:client-jvm:v5.1.0")
+
 
     // Room components
     val room_version = "2.6.0"
