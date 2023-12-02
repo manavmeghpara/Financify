@@ -2,17 +2,18 @@ package com.example.financify.ui.stocks
 
 import android.graphics.Color
 import android.graphics.Paint
-import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.R
 import com.example.financify.ui.stocks.stockDB.StockDao
@@ -28,7 +29,6 @@ import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.Quote
-import io.finnhub.api.models.StockCandles
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -59,6 +59,7 @@ class StockViewActivity : AppCompatActivity() {
     private lateinit var repository: StockRepository
     private lateinit var vmFactory: StocksViewModelFactory
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stock_view)
@@ -81,6 +82,10 @@ class StockViewActivity : AppCompatActivity() {
         vmFactory = StocksViewModelFactory(repository)
         stocksViewModel = ViewModelProvider(this, vmFactory).get(StocksViewModel::class.java)
 
+        StockApiService.stkSearchMutableLiveData.observe(this, Observer { it ->
+            updateChart(it);
+        })
+
         stockSymbol = intent?.getStringExtra(StocksFragment.STOCK_VIEW_KEY)
         if (stockSymbol != null) {
             GlobalScope.launch(Dispatchers.Main) {
@@ -92,12 +97,8 @@ class StockViewActivity : AppCompatActivity() {
             }
             // Use coroutines to fetch and visualize stock data
             GlobalScope.launch(Dispatchers.Main) {
-                val stockData = fetchStockData(stockSymbol!!)
-                println("List = ${stockData}")
-                stockData?.let {
-                    if(stockData.c != null){
-                        updateChart(it);
-                    }}
+                StockApiService.searchStock(stockSymbol!!)
+
             }
             GlobalScope.launch(Dispatchers.Main) {
                 val stockData = fetchData(stockSymbol!!)
@@ -117,11 +118,6 @@ class StockViewActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun fetchStockData(symbol: String): StockCandles? {
-        return withContext(Dispatchers.IO) {
-            StockApiService.searchStock(symbol)
-        }
-    }
 
     private suspend fun fetchData(symbol: String): Quote? {
         return withContext(Dispatchers.IO) {
@@ -135,18 +131,21 @@ class StockViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateChart(candles: StockCandles) {
+    private fun updateChart(candles: List<StockData>) {
         loadingProgressBar.visibility = View.GONE
         candleChart.isVisible = true
         // Extract data from candles and update the LineChart
         // You'll need to adapt this based on the format of data returned by Finnhub API
         val entries = ArrayList<CandleEntry>()
-        val dateIndex = arrayOfNulls<String>(candles.t!!.size)
+        val dateIndex = arrayOfNulls<String>(candles.size)
         var i = 0
-        while (i< candles.t!!.size){
-            val e = CandleEntry(i*1f, candles.h!![i], candles.l!![i], candles.o!![i], candles.c!![i])
+        while (i< candles.size){
+            val e = CandleEntry(i*1f,
+                candles[i].high.toFloat(), candles[i].low.toFloat(),
+                candles[i].open.toFloat(), candles[i].close.toFloat()
+            )
             entries.add(e)
-            dateIndex.set(i, getDayAndMonthFromTimestamp(candles.t!![i]).toString())
+            dateIndex.set(i, getDayAndMonthFromTimestamp(candles[i].timestamp).toString())
             i++
         }
         candleChart.setHighlightPerDragEnabled(true)
