@@ -1,6 +1,8 @@
 package com.example.financify.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
@@ -11,9 +13,9 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.financify.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.financify.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,7 +97,9 @@ class EditExpenses : AppCompatActivity() {
         val editExpenseNameEditText: EditText = dialogView.findViewById(R.id.editExpenseNameEditText)
         val editExpenseAmountEditText: EditText = dialogView.findViewById(R.id.editExpenseAmountEditText)
         val editExpenseButton: Button = dialogView.findViewById(R.id.editExpenseButton)
+        val addReminderButton: Button = dialogView.findViewById(R.id.addReminderButton)
         val deleteExpenseButton: Button = dialogView.findViewById(R.id.deleteExpenseButton)
+        addReminderButton.visibility = View.GONE
         deleteExpenseButton.visibility = View.GONE
 
         val dialogBuilder = AlertDialog.Builder(this)
@@ -127,6 +131,7 @@ class EditExpenses : AppCompatActivity() {
         val editExpenseNameEditText: EditText = dialogView.findViewById(R.id.editExpenseNameEditText)
         val editExpenseAmountEditText: EditText = dialogView.findViewById(R.id.editExpenseAmountEditText)
         val editExpenseDialogButton: Button = dialogView.findViewById(R.id.editExpenseButton)
+        val addReminderButton: Button = dialogView.findViewById(R.id.addReminderButton)
         val deleteExpenseDialogButton: Button = dialogView.findViewById(R.id.deleteExpenseButton)
 
         val currentExpense = expenseAdapter.getItem(position)
@@ -172,6 +177,19 @@ class EditExpenses : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
+        }
+
+        addReminderButton.setOnClickListener {
+            val appName: String = getString(R.string.app_name)
+
+            val intent = Intent(Intent.ACTION_INSERT)
+            intent.data = CalendarContract.Events.CONTENT_URI
+            intent.putExtra(CalendarContract.Events.ALL_DAY, true);
+            intent.putExtra(CalendarContract.Events.TITLE, expenseName)
+            intent.putExtra(CalendarContract.Events.RRULE, "FREQ=MONTHLY")
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, "Reminder added by ${appName}")
+
+            startActivity(intent);
         }
 
         deleteExpenseDialogButton.setOnClickListener {
