@@ -14,30 +14,23 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
 @Database(entities = [GoalEntity::class], version = 1)
-abstract class GoalDatabase : RoomDatabase(){
-    abstract val goalDatabaseDao : GoalDao
+abstract class GoalDatabase : RoomDatabase() {
+    abstract val goalDatabaseDao: GoalDao
 
-    companion object{
+    companion object {
 
         @Volatile
-        private var dbInstance: GoalDatabase ?= null
+        private var dbInstance: GoalDatabase? = null
 
-        fun getInstance(context : Context): GoalDatabase{
-            synchronized(this){
+        fun getInstance(context: Context): GoalDatabase {
+            synchronized(this) {
                 var instance = dbInstance
-                if(instance == null){
-                    instance = Room.databaseBuilder(context.applicationContext,
-                        GoalDatabase::class.java, "goal_data")
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        GoalDatabase::class.java, "goal_data"
+                    )
                         .addCallback(object : Callback() {
-                            override fun onCreate(db: SupportSQLiteDatabase) {
-                                super.onCreate(db)
-                                // insert the data on the IO Thread
-
-                                GlobalScope.launch {
-                                    getInstance(context).goalDatabaseDao.insert(PREPOPULATE_DATA[0])
-                                    getInstance(context).goalDatabaseDao.insert(PREPOPULATE_DATA[1])
-                                }
-                            }
                         })
                         .build()
                     dbInstance = instance
@@ -45,12 +38,8 @@ abstract class GoalDatabase : RoomDatabase(){
                 return instance
             }
         }
-
-        val PREPOPULATE_DATA = listOf(GoalEntity(0,"Electronic", "IPhone 15", 1500.0, 200.0),
-            GoalEntity(0,"Vehicle", "Bike", 300.0, 50.0))
     }
 }
-
 private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 
 /**

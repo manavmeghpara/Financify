@@ -10,19 +10,24 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.financify.MainActivity
 import com.example.financify.R
+import com.example.financify.SignInActivity
 import com.example.financify.databinding.FragmentDashboardBinding
 import com.example.financify.ui.savings.SavingActivity
 import com.example.financify.ui.stocks.StockViewActivity
 import com.example.financify.ui.stocks.StocksFragment
 import com.example.financify.ui.visualization.VisualizeActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class DashboardFragment : Fragment() {
 
     private lateinit var saving_btn: Button
     private var _binding: FragmentDashboardBinding? = null
+    private lateinit var firebaseAuth: FirebaseAuth
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -69,7 +74,14 @@ class DashboardFragment : Fragment() {
             val intent = Intent(requireActivity(), VisualizeActivity::class.java)
             startActivity(intent)
         }
-    //  menu pop-up button
+        var logoutButton: Button = root.findViewById(R.id.logout_btn)
+        logoutButton.setOnClickListener() {
+            FirebaseAuth.getInstance().signOut()
+            Toast.makeText(requireActivity(), "Logout successfully!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireActivity(), SignInActivity::class.java)
+            startActivity(intent)
+        }
+        //  menu pop-up button
         val menu_btn: Button = root.findViewById(R.id.menu_budget)
         // Initializing the popup menu and giving the reference as current context
         menu_btn.setOnClickListener(){

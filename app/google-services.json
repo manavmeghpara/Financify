@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247041923914",
+    "project_id": "financify-94bbc",
+    "storage_bucket": "financify-94bbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247041923914:android:7a7035fbb9b3afcbe0ffb3",
+        "android_client_info": {
+          "package_name": "com.example.financify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBMU_GbDCu0SyfmTVMlTjt85gRrkLpIM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
