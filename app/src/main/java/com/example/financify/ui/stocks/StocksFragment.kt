@@ -1,6 +1,8 @@
 package com.example.financify.ui.stocks
 
 import android.app.Activity
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -15,6 +17,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.financify.ExpenseWidget
 import com.example.financify.R
 import com.example.financify.databinding.FragmentStocksBinding
 import com.example.financify.ui.stocks.stockDB.StockDao
@@ -58,6 +61,16 @@ class StocksFragment : Fragment() {
         repository = StockRepository(dbDao)
         vmFactory = StocksViewModelFactory(repository)
         stocksViewModel =ViewModelProvider(this, vmFactory).get(StocksViewModel::class.java)
+
+        stocksViewModel.stockList.observe(viewLifecycleOwner, Observer { it->
+            val appWidgetManager = AppWidgetManager.getInstance(requireActivity().applicationContext)
+            val thisAppWidget = ComponentName(
+                requireActivity().applicationContext.packageName,
+                ExpenseWidget::class.java.name
+            )
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listview )
+        })
 
         _binding = FragmentStocksBinding.inflate(inflater, container, false)
         val root: View = binding.root

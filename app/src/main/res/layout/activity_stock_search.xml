@@ -7,30 +7,23 @@
     xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <AutoCompleteTextView
-        android:id="@+id/editTextSymbol"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter stock symbol"/>
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="400dp"
+        android:layout_height="180dp" />
 
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextSymbol"
-        android:text="Search"/>
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSearch"
+        android:layout_below="@id/compose_view"
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <com.github.mikephil.charting.charts.CandleStickChart
         android:id="@+id/stockChart"
-        android:layout_below="@id/buttonSearch"
+        android:layout_below="@id/compose_view"
         android:layout_width="500dp"
         android:layout_height="400dp" />
 
@@ -40,9 +33,10 @@
         android:layout_below="@id/stockChart"
         android:layout_width="130dp"
         android:layout_height="40dp"
+        android:layout_margin="20dp"
         numberpicker:min="0"
         numberpicker:max="10"
-        numberpicker:value="-5"
+        numberpicker:value="0"
         numberpicker:unit="1"
         numberpicker:focusable="false" />
 

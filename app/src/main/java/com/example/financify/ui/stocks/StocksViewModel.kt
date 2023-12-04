@@ -19,6 +19,10 @@ class StocksViewModel(private val repository: StockRepository) : ViewModel() {
         repository.delete(key)
     }
 
+    fun update(e: StockEntity){
+        repository.update(e)
+    }
+
 }
 
 class StocksViewModelFactory (private val repository: StockRepository): ViewModelProvider.Factory{

@@ -6,16 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.stocks.StockViewActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/stockHeading"
-        android:text=""
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:padding="16dp"
-        android:gravity="center" />
+    <androidx.compose.ui.platform.ComposeView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id ="@+id/compose" />
 
 
     <ProgressBar
@@ -29,63 +23,80 @@
         android:id="@+id/stockGraph"
         android:layout_width="500dp"
         android:layout_height="400dp"
-        android:layout_below="@id/stockHeading"/>
+        android:layout_margin="10dp"
+        android:layout_below="@id/compose"/>
 
-    <TextView
-        android:id="@+id/textViewOpenPrice"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open Price: "
         android:layout_below="@id/stockGraph"
-        android:layout_marginBottom="8dp"/>
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textViewHighPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="High Price: "
-        android:layout_below="@id/textViewOpenPrice"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewOpenPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open Price: "
+            android:layout_below="@id/stockGraph"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
 
-    <TextView
-        android:id="@+id/textViewLowPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Low Price: "
-        android:layout_below="@id/textViewHighPrice"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewHighPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High Price: "
+            android:layout_below="@id/textViewOpenPrice"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
 
-    <TextView
-        android:id="@+id/textViewCurrentPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Current Price: "
-        android:layout_below="@id/textViewLowPrice"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewLowPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low Price: "
+            android:layout_below="@id/textViewHighPrice"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
 
-    <TextView
-        android:id="@+id/textViewPreviousClosePrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Previous Close Price: "
-        android:layout_below="@id/textViewCurrentPrice"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewCurrentPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Price: "
+            android:layout_below="@id/textViewLowPrice"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
 
-    <TextView
-        android:id="@+id/textViewChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change: "
-        android:layout_below="@id/textViewPreviousClosePrice"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewPreviousClosePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous Close Price: "
+            android:layout_below="@id/textViewCurrentPrice"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
 
-    <TextView
-        android:id="@+id/textViewPercentChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Percent Change: "
-        android:layout_below="@id/textViewChange"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/textViewChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change: "
+            android:layout_below="@id/textViewPreviousClosePrice"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/textViewPercentChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percent Change: "
+            android:layout_below="@id/textViewChange"
+            android:layout_margin="5dp"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

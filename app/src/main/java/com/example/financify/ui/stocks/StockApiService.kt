@@ -33,6 +33,8 @@ object StockApiService {
     var responseMutableLiveData: MutableLiveData<List<String>> = MutableLiveData()
     var stkSearchMutableLiveData: MutableLiveData<List<StockData>> = MutableLiveData()
 
+    fun clear(){ stkSearchMutableLiveData = MutableLiveData<List<StockData>>() }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun searchStock(symbol: String) :  List<StockData>?{
         val currentDate = LocalDate.now()
