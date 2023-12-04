@@ -60,6 +60,9 @@
             android:name=".ui.budget.EditBudgetActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.budget.BudgetActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.budget.EditExpenses"
             android:exported="false" />
         <activity
