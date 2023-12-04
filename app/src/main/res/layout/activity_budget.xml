@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/activity_budget"
+    tools:context=".ui.budget.BudgetActivity">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/text_budget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monthly Budget"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <!-- Budget List -->
+    <ListView
+        android:id="@+id/budgetListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"/>
+
+    <!-- Add Category Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCategoryFAB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plus"
+        android:layout_gravity="center|bottom"
+        android:transitionName="@string/transition_budgetAddCategory"/>
+
+
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.financify.databinding.ActivityMainBinding
 import com.example.financify.databinding.FragmentDashboardBinding
+import com.example.financify.ui.budget.BudgetActivity
 import com.example.financify.ui.budget.BudgetFragment
 import com.example.financify.ui.budget.EditBudgetActivity
 import com.example.financify.ui.budget.EditExpenses
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
         val button: Button = findViewById(R.id.launch_budget)
         button.setOnClickListener() {
-            val intent = Intent(this, BudgetFragment::class.java)
+            val intent = Intent(this, BudgetActivity::class.java)
             startActivity(intent)
         }
 //        val textView: TextView = binding.textDashboard
