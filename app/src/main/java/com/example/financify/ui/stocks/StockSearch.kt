@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -14,6 +15,45 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.DockedSearchBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -38,94 +78,55 @@ import java.util.TimeZone
 
 
 class StockSearch : AppCompatActivity() {
-    private lateinit var editTextSymbol: AutoCompleteTextView
-    private lateinit var buttonSearch: Button
     private lateinit var saveBtn: Button
     private lateinit var cancelBtn: Button
     private lateinit var addStock: NumberPicker
     private lateinit var candleChart: CandleStickChart
     private var stockSymbol: String? = null
+    private lateinit var compose: ComposeView
 
     private lateinit var loadingProgressBar: ProgressBar
     companion object{
         val STOCK_TRANSFER_INTENT = "stock"
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stock_search)
 
-        editTextSymbol = findViewById(R.id.editTextSymbol)
-        buttonSearch = findViewById(R.id.buttonSearch)
+        compose = findViewById(R.id.compose_view)
+        compose.setContent {
+            DockedSearchBarSample()
+        }
+
         saveBtn = findViewById(R.id.save_)
         cancelBtn = findViewById(R.id.cancel_)
-        buttonSearch = findViewById(R.id.buttonSearch)
 
         addStock = findViewById(R.id.number_picker)
         candleChart = findViewById(R.id.stockChart)
         candleChart.isVisible = false
         loadingProgressBar = findViewById(R.id.loadingProgressBar)
 
-        StockApiService.responseMutableLiveData.observe(this@StockSearch, Observer { it->
-            var list = ArrayList<String>()
-            for (i in it!!)
-                list.add(i)
-            val adapter: ArrayAdapter<String> =
-                ArrayAdapter<String>(
-                    applicationContext,
-                    android.R.layout.simple_list_item_1,
-                    list
-                )
-            editTextSymbol.threshold = 1
-            editTextSymbol.setAdapter(adapter)
-            adapter.notifyDataSetChanged()
-        })
-
-        editTextSymbol.addTextChangedListener{
-            val query = it.toString()
-            if (query.length >= 1) {
-                GlobalScope.launch(Dispatchers.IO) {
-                    StockApiService.getAllRelatedStocks(query)
-                }
-
-            }
-        }
-
         StockApiService.stkSearchMutableLiveData.observe(this@StockSearch, Observer { it ->
             updateChart(it);
         })
 
-        buttonSearch.setOnClickListener {
-            showLoadingView()
-            val symbol = editTextSymbol.text.toString().trim()
-            if (symbol.isNotEmpty()) {
-                // Use coroutines to fetch and visualize stock data
-                GlobalScope.launch(Dispatchers.Main) {
-                    StockApiService.searchStock(symbol)
-                    stockSymbol = symbol
-                }
-            }
-            else{
-                editTextSymbol.setError("Please Enter a Stock Symbol!")
-                hideLoadingView()
-            }
-            val inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager.hideSoftInputFromWindow(editTextSymbol.windowToken, 0)
-        }
-
         cancelBtn.setOnClickListener{
+            StockApiService.clear()
             this.finish()
         }
 
         saveBtn.setOnClickListener{
             if(stockSymbol!=null) {
-                var stock =  StockEntity(0,stockSymbol!!, addStock.value )
+                var stock =  StockEntity(0, stockSymbol!!.uppercase(), addStock.value )
                 val intent = Intent()
                 val gson = Gson()
                 val data = gson.toJson(stock)
                 intent.putExtra(STOCK_TRANSFER_INTENT, data)
                 setResult(RESULT_OK, intent)
+                StockApiService.clear()
                 this.finish()
             }
         }
@@ -133,6 +134,63 @@ class StockSearch : AppCompatActivity() {
 
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun DockedSearchBarSample() {
+        var text by rememberSaveable { mutableStateOf("") }
+        var list by  rememberSaveable { mutableStateOf(listOf<String>()) }
+        var active by rememberSaveable { mutableStateOf(false) }
+
+        Box(
+            Modifier
+                .fillMaxSize()
+                .semantics { isTraversalGroup = true }) {
+            DockedSearchBar(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 8.dp)
+                    .semantics { traversalIndex = -1f },
+                query = text,
+                onQueryChange = { text = it
+                                       StockApiService.getAllRelatedStocks(it)
+                },
+                onSearch = { active = false
+                    showLoadingView()
+                    StockApiService.searchStock(text.uppercase())
+                    stockSymbol = text
+                           compose.layoutParams.height = 220},
+                active = active,
+                onActiveChange = { active = it },
+                placeholder = { Text("Enter Stock Symbol") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                trailingIcon = { Icon(Icons.Default.MoreVert, contentDescription = null) },
+            ) {
+                StockApiService.responseMutableLiveData.observe(
+                    this@StockSearch,
+                    Observer { it ->
+                        list = it
+                        println(list)
+                    })
+                list.forEach {
+                    Row(modifier = Modifier.padding(all = 14.dp)) {
+                        Text(
+                            text = it,
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .clickable {
+                                    text = it
+                                    active = false
+                                }
+                        )
+                    }
+
+                }
+            }
+        }
+    }
 
 
     private fun updateChart(candles: List<StockData>) {

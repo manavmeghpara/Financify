@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "stocks")
 data class StockEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    var id: Long = 0,
 
     var symbol: String = "",
 

@@ -2,13 +2,14 @@ package com.example.financify.ui.stocks.stockDB
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StockDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(stock: StockEntity)
 
     @Update
@@ -19,4 +20,6 @@ interface StockDao {
 
     @Query("DELETE FROM stocks WHERE symbol=:key")
     suspend fun deleteStock(key: String)
+
+
 }

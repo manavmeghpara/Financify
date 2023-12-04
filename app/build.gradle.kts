@@ -20,6 +20,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -62,6 +68,21 @@ dependencies {
     implementation("androidx.transition:transition-ktx:1.4.1")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.github.polygon-io:client-jvm:v5.1.0")
+
+    implementation ("androidx.compose.ui:ui:1.2.0-alpha04")
+    implementation ("androidx.compose.foundation:foundation:1.2.0-alpha04")
+    implementation ("androidx.compose.material:material:1.2.0-alpha04")
+    val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    implementation("androidx.compose.material3:material3")
+    // For AppWidgets support
+    implementation ("androidx.glance:glance-appwidget:1.0.0")
+    // For interop APIs with Material 2
+    implementation ("androidx.glance:glance-material:1.0.0")
+
+    // For interop APIs with Material 3
+    implementation ("androidx.glance:glance-material3:1.0.0")
 
 
     // Room components

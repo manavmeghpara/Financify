@@ -1,6 +1,5 @@
 package com.example.financify.ui.stocks
 
-import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,39 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.core.view.allViews
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -46,8 +78,6 @@ class StockViewActivity : AppCompatActivity() {
     private lateinit var prevCloseTextView: TextView
     private lateinit var changeTextView: TextView
     private lateinit var percentTextView: TextView
-    private lateinit var stockHeading: TextView
-
 
     private var stockSymbol: String? = null
     private lateinit var loadingProgressBar: ProgressBar
@@ -62,6 +92,8 @@ class StockViewActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if(this.supportActionBar!=null)
+            this.supportActionBar!!.hide();
         setContentView(R.layout.activity_stock_view)
         candleChart = findViewById(R.id.stockGraph)
         openTextView = findViewById(R.id.textViewOpenPrice)
@@ -71,7 +103,6 @@ class StockViewActivity : AppCompatActivity() {
         prevCloseTextView = findViewById(R.id.textViewPreviousClosePrice)
         changeTextView = findViewById(R.id.textViewChange)
         percentTextView = findViewById(R.id.textViewPercentChange)
-        stockHeading = findViewById(R.id.stockHeading)
 
         loadingProgressBar = findViewById(R.id.loading)
 
@@ -92,7 +123,7 @@ class StockViewActivity : AppCompatActivity() {
                 val description = fetchStockDescription(stockSymbol!!)
                 description?.let {
                     if(description.name != null){
-                        stockHeading.text = description.name + "(" +description.ticker+ ")"
+                        findViewById<ComposeView>(R.id.compose).setContent { MediumTopAppBarExample(description.name + " (" +description.ticker+ ")") }
                     }}
             }
             // Use coroutines to fetch and visualize stock data
@@ -116,6 +147,51 @@ class StockViewActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MediumTopAppBarExample(symbol: String) {
+        val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
+        Scaffold(
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            topBar = {
+                MediumTopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    title = {
+                        Text(
+                            symbol,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { this@StockViewActivity.finish() }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = "Localized description"
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { stocksViewModel.delete(stockSymbol!!)
+                            Toast.makeText(this@StockViewActivity, "Stock deleted!", Toast.LENGTH_LONG).show()
+                            this@StockViewActivity.finish()}) {
+                            Icon(
+                                imageVector = Icons.Filled.Delete,
+                                contentDescription = "Localized description"
+                            )
+                        }
+                    },
+                    scrollBehavior = scrollBehavior
+                )
+            },
+        ) {}
     }
 
 
@@ -150,7 +226,7 @@ class StockViewActivity : AppCompatActivity() {
         }
         candleChart.setHighlightPerDragEnabled(true)
         candleChart.setDrawBorders(true)
-        candleChart.setBorderColor(Color.LTGRAY)
+        candleChart.setBorderColor(android.graphics.Color.LTGRAY)
 
         val yAxis: YAxis = candleChart.getAxisLeft()
         val rightAxis: YAxis = candleChart.getAxisRight()
@@ -163,7 +239,7 @@ class StockViewActivity : AppCompatActivity() {
         xAxis.setDrawGridLines(true) // disable x axis grid lines
 
         xAxis.setDrawLabels(true)
-        rightAxis.textColor = Color.WHITE
+        rightAxis.textColor = android.graphics.Color.WHITE
         yAxis.setDrawLabels(true)
         xAxis.granularity = 1f
         xAxis.isGranularityEnabled = true
@@ -179,14 +255,14 @@ class StockViewActivity : AppCompatActivity() {
 
         //System.out.println(candleValues.toString());
         val set1 = CandleDataSet(entries, "Stock Prices")
-        set1.color = Color.rgb(80, 80, 80)
-        set1.shadowColor = Color.GRAY
+        set1.color = android.graphics.Color.rgb(80, 80, 80)
+        set1.shadowColor = android.graphics.Color.GRAY
         set1.shadowWidth = 0.8f
-        set1.decreasingColor = Color.RED
+        set1.decreasingColor = android.graphics.Color.RED
         set1.decreasingPaintStyle = Paint.Style.FILL
-        set1.increasingColor = Color.GREEN
+        set1.increasingColor = android.graphics.Color.GREEN
         set1.increasingPaintStyle = Paint.Style.FILL
-        set1.neutralColor = Color.LTGRAY
+        set1.neutralColor = android.graphics.Color.LTGRAY
         set1.setDrawValues(false)
 
 
