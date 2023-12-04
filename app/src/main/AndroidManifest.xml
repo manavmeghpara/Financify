@@ -57,7 +57,7 @@
             android:name=".SignUpActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.budget.EditBudget"
+            android:name=".ui.budget.EditBudgetActivity"
             android:exported="false" />
         <activity
             android:name=".ui.budget.EditExpenses"

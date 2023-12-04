@@ -2,7 +2,6 @@ package com.example.financify.ui.budget
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.widget.Button
 import android.widget.EditText
@@ -10,8 +9,6 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.transition.Slide
 import androidx.transition.Transition
 import com.example.financify.R
 import com.example.financify.ui.budget.DBs.BudgetDatabase
@@ -21,10 +18,9 @@ import com.example.financify.ui.budget.DBs.CategoryDao
 import com.example.financify.ui.budget.DBs.CategoryRepository
 import com.example.financify.ui.budget.DBs.CategoryViewModel
 import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
-import com.google.android.material.transition.platform.MaterialContainerTransform
 
 
-class EditBudget : AppCompatActivity() {
+class EditBudgetActivity : AppCompatActivity() {
     private lateinit var budgetListView: ListView
     private lateinit var addCategoryButton: Button
     private lateinit var saveBudgetButton: Button

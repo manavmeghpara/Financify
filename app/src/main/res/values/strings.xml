@@ -7,4 +7,6 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="transition_budgetAddCategory">budgetAddCategoryTransition</string>
+    <string name="ui_cancel">CANCEL</string>
+    <string name="ui_save">SAVE</string>
 </resources>

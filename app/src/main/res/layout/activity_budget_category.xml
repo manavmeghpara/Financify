@@ -22,17 +22,22 @@
         android:inputType="numberDecimal"
         android:hint="Amount"/>
 
-    <!-- Edit Category Button -->
-    <Button
-        android:id="@+id/editCategoryDialogButton"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm"/>
-
-    <!-- Delete Category Button -->
-    <Button
-        android:id="@+id/deleteCategoryDialogButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Category"/>
+        android:layout_gravity="center">
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/deleteCategoryDialogButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_cancel" />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/editCategoryDialogButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_save" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 </LinearLayout>

@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.MenuInflater
 import android.widget.Button
 import android.widget.PopupMenu
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.financify.databinding.ActivityMainBinding
 import com.example.financify.databinding.FragmentDashboardBinding
-import com.example.financify.ui.budget.EditBudget
+import com.example.financify.ui.budget.EditBudgetActivity
 import com.example.financify.ui.budget.EditExpenses
 import com.example.financify.ui.budget.EditPurchases
 import com.example.financify.ui.savings.SavingActivity
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
         var button: Button = findViewById(R.id.launch_budget)
         button.setOnClickListener() {
-            val intent = Intent(this, EditBudget::class.java)
+            val intent = Intent(this, EditBudgetActivity::class.java)
             startActivity(intent)
         }
 //        val textView: TextView = binding.textDashboard
