@@ -13,13 +13,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.financify.MainActivity
 import com.example.financify.R
 import com.example.financify.SignInActivity
 import com.example.financify.databinding.FragmentDashboardBinding
+import com.example.financify.ui.budget.EditBudget
+import com.example.financify.ui.budget.EditExpenses
+import com.example.financify.ui.budget.EditPurchases
 import com.example.financify.ui.savings.SavingActivity
-import com.example.financify.ui.stocks.StockViewActivity
-import com.example.financify.ui.stocks.StocksFragment
 import com.example.financify.ui.visualization.VisualizeActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -43,53 +43,10 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        saving_btn = root.findViewById(R.id.savings_btn)
 
-        saving_btn.setOnClickListener{
-            val intent = Intent(requireContext(), SavingActivity::class.java)
-            startActivity(intent)
-        }
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        var button: Button = root.findViewById(R.id.launch_budget)
-        button.setOnClickListener() {
-            val intent = Intent(requireActivity(), EditBudget::class.java)
-            startActivity(intent)
-        }
-        var expenseButton: Button = root.findViewById(R.id.launch_expenses)
-        expenseButton.setOnClickListener() {
-            val intent = Intent(requireActivity(), EditExpenses::class.java)
-            startActivity(intent)
-        }
-        var purchaseButton: Button = root.findViewById(R.id.launch_purchases)
-        purchaseButton.setOnClickListener() {
-            val intent = Intent(requireActivity(), EditPurchases::class.java)
-            startActivity(intent)
-        }
-        var visualizationButton: Button = root.findViewById(R.id.launch_visualization)
-        visualizationButton.setOnClickListener() {
-            val intent = Intent(requireActivity(), VisualizeActivity::class.java)
-            startActivity(intent)
-        }
-        var logoutButton: Button = root.findViewById(R.id.logout_btn)
-        logoutButton.setOnClickListener() {
-            FirebaseAuth.getInstance().signOut()
-            Toast.makeText(requireActivity(), "Logout successfully!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireActivity(), SignInActivity::class.java)
-            startActivity(intent)
-        }
-        //  menu pop-up button
-        val menu_btn: Button = root.findViewById(R.id.menu_budget)
-        // Initializing the popup menu and giving the reference as current context
-        menu_btn.setOnClickListener(){
-            val popupMenu: PopupMenu = PopupMenu(requireActivity(), it, Gravity.FILL_VERTICAL)
-            val inflater: MenuInflater = popupMenu.menuInflater
-            inflater.inflate(R.menu.popup_menu, popupMenu.menu)
-            popupMenu.show()
-        }
+
+
         return root
     }
 

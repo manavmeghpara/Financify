@@ -1,4 +1,4 @@
-package com.example.financify.ui.home
+package com.example.financify.ui.budget
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,7 +1,6 @@
-package com.example.financify.ui.dashboard
+package com.example.financify.ui.budget.DBs
 
 import android.icu.util.Calendar
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.example.financify.ui.dashboard
+package com.example.financify.ui.budget
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +16,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.R
+import com.example.financify.ui.budget.DBs.BudgetDatabase
+import com.example.financify.ui.budget.DBs.Category
+import com.example.financify.ui.budget.DBs.CategoryDao
+import com.example.financify.ui.budget.DBs.CategoryRepository
+import com.example.financify.ui.budget.DBs.CategoryViewModel
+import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
+import com.example.financify.ui.budget.DBs.Expense
+import com.example.financify.ui.budget.DBs.ExpenseDao
+import com.example.financify.ui.budget.DBs.ExpenseRepository
+import com.example.financify.ui.budget.DBs.ExpenseViewModel
+import com.example.financify.ui.budget.DBs.ExpenseViewModelFactory
+import com.example.financify.ui.budget.DBs.ExpensesAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

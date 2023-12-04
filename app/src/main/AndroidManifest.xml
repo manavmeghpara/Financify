@@ -57,13 +57,13 @@
             android:name=".SignUpActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.dashboard.EditBudget"
+            android:name=".ui.budget.EditBudget"
             android:exported="false" />
         <activity
-            android:name=".ui.dashboard.EditExpenses"
+            android:name=".ui.budget.EditExpenses"
             android:exported="false" />
         <activity
-            android:name=".ui.dashboard.EditPurchases"
+            android:name=".ui.budget.EditPurchases"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

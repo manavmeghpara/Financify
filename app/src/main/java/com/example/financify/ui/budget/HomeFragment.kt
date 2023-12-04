@@ -1,4 +1,4 @@
-package com.example.financify.ui.home
+package com.example.financify.ui.budget
 
 import android.os.Bundle
 import android.view.LayoutInflater

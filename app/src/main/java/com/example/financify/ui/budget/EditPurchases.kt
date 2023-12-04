@@ -1,4 +1,4 @@
-package com.example.financify.ui.dashboard
+package com.example.financify.ui.budget
 
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
@@ -16,6 +16,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.financify.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.financify.ui.budget.DBs.BudgetDatabase
+import com.example.financify.ui.budget.DBs.Category
+import com.example.financify.ui.budget.DBs.CategoryDao
+import com.example.financify.ui.budget.DBs.CategoryRepository
+import com.example.financify.ui.budget.DBs.CategoryViewModel
+import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
+import com.example.financify.ui.budget.DBs.Purchase
+import com.example.financify.ui.budget.DBs.PurchaseDao
+import com.example.financify.ui.budget.DBs.PurchaseRepository
+import com.example.financify.ui.budget.DBs.PurchaseViewModel
+import com.example.financify.ui.budget.DBs.PurchaseViewModelFactory
+import com.example.financify.ui.budget.DBs.PurchasesAdapter
 
 class EditPurchases : AppCompatActivity() {
     private lateinit var purchaseListView: ListView

@@ -1,9 +1,8 @@
-package com.example.financify.ui.dashboard
+package com.example.financify.ui.budget
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View.GONE
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
@@ -13,6 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.financify.R
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.financify.ui.budget.DBs.BudgetDatabase
+import com.example.financify.ui.budget.DBs.Category
+import com.example.financify.ui.budget.DBs.CategoryAdapter
+import com.example.financify.ui.budget.DBs.CategoryDao
+import com.example.financify.ui.budget.DBs.CategoryRepository
+import com.example.financify.ui.budget.DBs.CategoryViewModel
+import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
 
 
 class EditBudget : AppCompatActivity() {

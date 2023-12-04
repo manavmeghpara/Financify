@@ -1,4 +1,4 @@
-package com.example.financify.ui.dashboard
+package com.example.financify.ui.budget.DBs
 
 import android.content.Context
 import android.view.LayoutInflater
