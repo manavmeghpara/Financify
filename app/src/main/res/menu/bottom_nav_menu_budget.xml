@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_expenses"
+        android:icon="@drawable/ic_checkbook"
+        android:title="@string/ui_expenses"/>
+    <item
+        android:id="@+id/navigation_purchases"
+        android:icon="@drawable/ic_account_balance_wallet"
+        android:title="@string/ui_purchases"/>
+
+</menu>

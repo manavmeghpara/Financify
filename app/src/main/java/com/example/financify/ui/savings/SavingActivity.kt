@@ -32,7 +32,8 @@ class SavingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saving)
-        lateinit var fabAddGoal: FloatingActionButton
+
+
 
         goalListView = findViewById(R.id.goalListView)
         database =GoalDatabase.getInstance(this)
@@ -50,7 +51,7 @@ class SavingActivity : AppCompatActivity() {
             goalListView.adapter = goalAdapter
             goalAdapter.notifyDataSetChanged()
         })
-        fabAddGoal = findViewById(R.id.fab_add_goal)
+        var fabAddGoal: FloatingActionButton = findViewById(R.id.fab_add_goal)
         fabAddGoal.setOnClickListener {
             showAddGoalDialog()
         }

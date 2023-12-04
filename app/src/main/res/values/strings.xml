@@ -9,4 +9,8 @@
     <string name="transition_budgetAddCategory">budgetAddCategoryTransition</string>
     <string name="ui_cancel">CANCEL</string>
     <string name="ui_save">SAVE</string>
+    <string name="ui_expenses">Expenses</string>
+    <string name="ui_purchases">Purchases</string>
+    <string name="ui_logout">Logout</string>
+    <string name="title_savings_goals">Savings Goals</string>
 </resources>
