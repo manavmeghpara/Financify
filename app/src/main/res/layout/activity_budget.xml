@@ -28,6 +28,27 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp"/>
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/launch_expenses"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_expenses" />
+
+        <Button
+            android:id="@+id/launch_purchases"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_purchases" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
     <!-- Add Category Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addCategoryFAB"

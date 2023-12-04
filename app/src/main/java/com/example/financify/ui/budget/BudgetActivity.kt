@@ -42,16 +42,16 @@ class BudgetActivity: AppCompatActivity() {
         val budgetViewModel =
             ViewModelProvider(this)[BudgetViewModel::class.java]
 
-//        val expenseButton: Button = findViewById(R.id.launch_expenses)
-//        expenseButton.setOnClickListener() {
-//            val intent = Intent(this, EditExpenses::class.java)
-//            startActivity(intent)
-//        }
-//        val purchaseButton: Button = findViewById(R.id.launch_purchases)
-//        purchaseButton.setOnClickListener() {
-//            val intent = Intent(this, EditPurchases::class.java)
-//            startActivity(intent)
-//        }
+        val expenseButton: Button = findViewById(R.id.launch_expenses)
+        expenseButton.setOnClickListener() {
+            val intent = Intent(this, EditExpenses::class.java)
+            startActivity(intent)
+        }
+        val purchaseButton: Button = findViewById(R.id.launch_purchases)
+        purchaseButton.setOnClickListener() {
+            val intent = Intent(this, EditPurchases::class.java)
+            startActivity(intent)
+        }
 
         budgetListView = findViewById(R.id.budgetListView)
         addCategoryButton = findViewById(R.id.addCategoryFAB)
