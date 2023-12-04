@@ -9,6 +9,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -49,6 +50,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        val toolbar: Toolbar = findViewById(R.id.topAppBar)
+        val logoutMenuItem = toolbar.menu.findItem(R.id.navigation_logout)
+        logoutMenuItem.setOnMenuItemClickListener {
+            // Check if selected menu item is the logout item
+            when (it.itemId) {
+                R.id.navigation_logout -> {
+                    logout()
+                    true
+                }
+                else -> false
+            }
+        }
+
         saving_btn = findViewById(R.id.savings_btn)
         saving_btn.setOnClickListener{
             val intent = Intent(this, SavingActivity::class.java)
@@ -80,10 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
         var logoutButton: Button = findViewById(R.id.logout_btn)
         logoutButton.setOnClickListener() {
-            FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, "Logout successfully!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
+            logout()
         }
 
         //  menu pop-up button
@@ -96,5 +107,12 @@ class MainActivity : AppCompatActivity() {
             popupMenu.show()
         }
 
+    }
+
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        Toast.makeText(this, "Logout successfully!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
     }
 }
