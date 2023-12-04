@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Financify</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_budget">Budget</string>
+    <string name="title_savings">Savings</string>
     <string name="title_stock">Stocks</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
@@ -9,4 +9,9 @@
     <string name="transition_budgetAddCategory">budgetAddCategoryTransition</string>
     <string name="ui_cancel">CANCEL</string>
     <string name="ui_save">SAVE</string>
+    <string name="ui_expenses">Expenses</string>
+    <string name="ui_purchases">Purchases</string>
+    <string name="ui_logout">Logout</string>
+    <string name="title_savings_goals">Savings Goals</string>
+    <string name="title_more">More</string>
 </resources>

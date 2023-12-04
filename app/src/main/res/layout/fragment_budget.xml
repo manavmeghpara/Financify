@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_budget"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.budget.BudgetFragment">
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/nav_view_budget"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        app:menu="@menu/bottom_nav_menu_budget"-->
+<!--        android:layout_gravity="bottom"/>-->
+<!--    <fragment-->
+<!--        android:id="@+id/nav_host_fragment_budget"-->
+<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:defaultNavHost="true"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/nav_view_budget"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:navGraph="@navigation/mobile_navigation" />-->
     <!-- Title -->
     <TextView
         android:id="@+id/text_budget"
@@ -22,10 +42,33 @@
     <ListView
         android:id="@+id/budgetListView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="247dp"
         android:layout_weight="1"
         android:divider="@android:color/darker_gray"
-        android:dividerHeight="0.5dp"/>
+        android:dividerHeight="0.5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/launch_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Launch expenses"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+
+        <Button
+            android:id="@+id/launch_purchases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Launch purchases (TODO)"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+    </LinearLayout>
 
     <!-- Add Category Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,7 +78,6 @@
         android:src="@drawable/ic_plus"
         android:layout_gravity="center|bottom"
         android:transitionName="@string/transition_budgetAddCategory"/>
-
 
 
 </LinearLayout>

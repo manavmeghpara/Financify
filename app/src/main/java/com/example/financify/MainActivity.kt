@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.financify.databinding.ActivityMainBinding
 import com.example.financify.databinding.FragmentDashboardBinding
+import com.example.financify.ui.budget.BudgetFragment
 import com.example.financify.ui.budget.EditBudgetActivity
 import com.example.financify.ui.budget.EditExpenses
 import com.example.financify.ui.budget.EditPurchases
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_stocks
+                R.id.navigation_budget, R.id.navigation_savings, R.id.navigation_stocks
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -52,25 +53,25 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SavingActivity::class.java)
             startActivity(intent)
         }
-        var button: Button = findViewById(R.id.launch_budget)
+        val button: Button = findViewById(R.id.launch_budget)
         button.setOnClickListener() {
-            val intent = Intent(this, EditBudgetActivity::class.java)
+            val intent = Intent(this, BudgetFragment::class.java)
             startActivity(intent)
         }
 //        val textView: TextView = binding.textDashboard
 //        dashboardViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        var expenseButton: Button = findViewById(R.id.launch_expenses)
-        expenseButton.setOnClickListener() {
-            val intent = Intent(this, EditExpenses::class.java)
-            startActivity(intent)
-        }
-        var purchaseButton: Button = findViewById(R.id.launch_purchases)
-        purchaseButton.setOnClickListener() {
-            val intent = Intent(this, EditPurchases::class.java)
-            startActivity(intent)
-        }
+//        var expenseButton: Button = findViewById(R.id.launch_expenses)
+//        expenseButton.setOnClickListener() {
+//            val intent = Intent(this, EditExpenses::class.java)
+//            startActivity(intent)
+//        }
+//        var purchaseButton: Button = findViewById(R.id.launch_purchases)
+//        purchaseButton.setOnClickListener() {
+//            val intent = Intent(this, EditPurchases::class.java)
+//            startActivity(intent)
+//        }
         var visualizationButton: Button = findViewById(R.id.launch_visualization)
         visualizationButton.setOnClickListener() {
             val intent = Intent(this, VisualizeActivity::class.java)

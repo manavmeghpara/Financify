@@ -1,16 +1,24 @@
 package com.example.financify.ui.budget
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.financify.R
 import com.example.financify.databinding.FragmentBudgetBinding
 import com.example.financify.ui.budget.DBs.BudgetDatabase
@@ -19,6 +27,7 @@ import com.example.financify.ui.budget.DBs.CategoryDao
 import com.example.financify.ui.budget.DBs.CategoryRepository
 import com.example.financify.ui.budget.DBs.CategoryViewModel
 import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.transition.MaterialElevationScale
 
@@ -52,10 +61,24 @@ class BudgetFragment : Fragment() {
         _binding = FragmentBudgetBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         val textView: TextView = binding.textBudget
         budgetViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val expenseButton: Button = root.findViewById(R.id.launch_expenses)
+        expenseButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditExpenses::class.java)
+            startActivity(intent)
+        }
+        val purchaseButton: Button = root.findViewById(R.id.launch_purchases)
+        purchaseButton.setOnClickListener() {
+            val intent = Intent(requireActivity(), EditPurchases::class.java)
+            startActivity(intent)
+        }
+
 
         budgetListView = root.findViewById(R.id.budgetListView)
         addCategoryButton = root.findViewById(R.id.addCategoryFAB)
