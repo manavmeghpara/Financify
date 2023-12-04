@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.budget.BudgetFragment">
 
     <!-- Title -->
     <TextView
+        android:id="@+id/text_budget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monthly Budget"
@@ -26,23 +28,14 @@
         android:dividerHeight="0.5dp"/>
 
     <!-- Add Category Button -->
-    <Button
-        android:id="@+id/addCategoryButton"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCategoryFAB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Category"/>
+        android:src="@drawable/ic_plus"
+        android:layout_gravity="center|bottom"
+        android:transitionName="@string/transition_budgetAddCategory"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/saveBudgetButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Finish"/>
-    </LinearLayout>
 
 </LinearLayout>

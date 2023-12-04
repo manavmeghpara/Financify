@@ -2,6 +2,7 @@ package com.example.financify.ui.budget
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.widget.Button
 import android.widget.EditText
@@ -9,9 +10,10 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.transition.Slide
+import androidx.transition.Transition
 import com.example.financify.R
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.financify.ui.budget.DBs.BudgetDatabase
 import com.example.financify.ui.budget.DBs.Category
 import com.example.financify.ui.budget.DBs.CategoryAdapter
@@ -19,6 +21,7 @@ import com.example.financify.ui.budget.DBs.CategoryDao
 import com.example.financify.ui.budget.DBs.CategoryRepository
 import com.example.financify.ui.budget.DBs.CategoryViewModel
 import com.example.financify.ui.budget.DBs.CategoryViewModelFactory
+import com.google.android.material.transition.platform.MaterialContainerTransform
 
 
 class EditBudget : AppCompatActivity() {
@@ -32,39 +35,14 @@ class EditBudget : AppCompatActivity() {
     private lateinit var repository: CategoryRepository
     private lateinit var viewModelFactory: CategoryViewModelFactory
     private lateinit var categoryViewModel: CategoryViewModel
+
+    private lateinit var enterTransition: Transition
+    private lateinit var returnTransition: Transition
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_budget)
-
-        budgetListView = findViewById(R.id.budgetListView)
-        addCategoryButton = findViewById(R.id.addCategoryButton)
-        saveBudgetButton = findViewById(R.id.saveBudgetButton)
-
-        database = BudgetDatabase.getDatabase(this)
-        databaseDao = database.categoryDao()
-        repository = CategoryRepository(databaseDao)
-        viewModelFactory = CategoryViewModelFactory(repository)
-        categoryViewModel = ViewModelProvider(this, viewModelFactory)[CategoryViewModel::class.java]
-
-        // Initialize empty adapter while waiting for
-        categoryAdapter = CategoryAdapter(this, mutableListOf())
-        categoryViewModel.allCategoriesLiveData.observe(this, Observer { categories ->
-            categoryAdapter.updateData(categories)
-        })
-        budgetListView.adapter = categoryAdapter
-
-        budgetListView.setOnItemClickListener { _, _, position, _ ->
-            showEditCategoryDialog(position)
-        }
-
-        addCategoryButton.setOnClickListener {
-            showAddCategoryDialog()
-        }
-
-        saveBudgetButton.setOnClickListener {
-            finish()
-        }
+        setContentView(R.layout.activity_budget_category)
     }
+
 
     private fun showAddCategoryDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_budget_category, null)

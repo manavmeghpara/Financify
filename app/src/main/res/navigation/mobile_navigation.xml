@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.financify.ui.budget.HomeFragment"
+        android:name="com.example.financify.ui.budget.BudgetFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_budget" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
