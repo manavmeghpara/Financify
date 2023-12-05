@@ -117,7 +117,7 @@ class StockViewActivity : AppCompatActivity() {
             updateChart(it);
         })
 
-        stockSymbol = intent?.getStringExtra(StocksFragment.STOCK_VIEW_KEY)
+        stockSymbol = intent?.getStringExtra(StockActivity.STOCK_VIEW_KEY)
         if (stockSymbol != null) {
             GlobalScope.launch(Dispatchers.Main) {
                 val description = fetchStockDescription(stockSymbol!!)

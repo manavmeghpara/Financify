@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -7,104 +7,140 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
 
-    <fragment
-        android:id="@+id/nav_host_fragment_activity_main"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="408dp"
-        android:layout_height="591dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642" />
-    <!--app:navGraph="@navigation/mobile_navigation"-->
-
-    <Button
-        android:id="@+id/launch_visualization"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="48dp"
-        android:text="Launch Visualization"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBarREF" />
-
-
-    <Button
-        android:id="@+id/launch_budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="28dp"
-        android:text="Launch budget"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launch_visualization" />
-
-    <Button
-        android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="52dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="20dp"
-        android:text="Logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launch_budget" />
 
 <!--    <Button-->
-<!--        android:id="@+id/launch_purchases"-->
+<!--        android:id="@+id/launch_visualization"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="60dp"-->
-<!--        android:text="Launch purchases (TODO)"-->
+<!--        android:layout_marginStart="96dp"-->
+<!--        android:layout_marginTop="48dp"-->
+<!--        android:text="Launch Visualization"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/logout_btn" />-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/topAppBarREF" />-->
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChartMain"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="16dp"
+        android:layout_centerInParent="true" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:id="@+id/horizontal_barchartMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
 <!--    <Button-->
-<!--        android:id="@+id/launch_expenses"-->
+<!--        android:id="@+id/launch_budget"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_marginStart="116dp"-->
-<!--        android:text="Launch expenses"-->
+<!--        android:layout_marginTop="28dp"-->
+<!--        android:text="Launch budget"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/launch_purchases" />-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/launch_visualization" />-->
 
-    <Button
-        android:id="@+id/savings_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="32dp"
-        android:text="Savings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/launch_expenses" />
+<!--    <Button-->
+<!--        android:id="@+id/logout_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="52dp"-->
+<!--        android:layout_marginStart="140dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Logout"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/launch_budget" />-->
 
-    <Button
-        android:id="@+id/menu_budget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="more"
-        app:flow_horizontalBias="20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savings_btn"
-        app:layout_constraintVertical_bias="0.055"
-        tools:layout_editor_absoluteX="161dp" />
-    <!--        android:drawableStart="@drawable/stock_cat"-->
+<!--&lt;!&ndash;    <Button&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/launch_purchases"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_marginStart="60dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:text="Launch purchases (TODO)"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/logout_btn" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <Button&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/launch_expenses"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_marginStart="116dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:text="Launch expenses"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintTop_toBottomOf="@+id/launch_purchases" />&ndash;&gt;-->
+
+<!--    <Button-->
+<!--        android:id="@+id/savings_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="156dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:text="Savings"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/launch_expenses" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/menu_budget"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="100dp"-->
+<!--        android:text="more"-->
+<!--        app:flow_horizontalBias="20"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/savings_btn"-->
+<!--        app:layout_constraintVertical_bias="0.055"-->
+<!--        tools:layout_editor_absoluteX="161dp" />-->
+<!--    &lt;!&ndash;        android:drawableStart="@drawable/stock_cat"&ndash;&gt;-->
+
+    <!-- This is NOT a root view, but should be a child of whatever root view you choose (CoordinatorLayout, ConstraintLayout, etc) -->
+    <com.nambimobile.widgets.efab.ExpandableFabLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- The next 3 Views will only display in portrait orientation -->
+        <com.nambimobile.widgets.efab.Overlay
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:overlay_orientation="portrait"/>
+        <com.nambimobile.widgets.efab.ExpandableFab
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_gravity="bottom|end"
+            app:efab_orientation="portrait"/>
+        <com.nambimobile.widgets.efab.FabOption
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_orientation="portrait"
+            app:fab_icon="@drawable/img"
+            app:label_text="Manage Budget"
+            android:onClick="openBudget"/>
+        <com.nambimobile.widgets.efab.FabOption
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_orientation="portrait"
+            app:fab_icon="@drawable/img_1"
+            app:label_text="Savings"
+            android:onClick="openSavings"/>
+        <com.nambimobile.widgets.efab.FabOption
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_orientation="portrait"
+            app:fab_icon="@drawable/img_2"
+            app:label_text="Stocks"
+            android:onClick="openStocks"/>
+<!--            android:onClick="onClickPortraitOption1"/>-->
+
+    </com.nambimobile.widgets.efab.ExpandableFabLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
