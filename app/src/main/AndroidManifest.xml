@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Financify"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.stocks.StockActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".ExpenseWidget"
             android:exported="false">
@@ -55,7 +59,7 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.budget.EditBudgetActivity"
             android:exported="false" />
@@ -71,8 +75,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

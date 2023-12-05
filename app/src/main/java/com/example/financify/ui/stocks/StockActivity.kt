@@ -3,22 +3,13 @@ package com.example.financify.ui.stocks
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.ListView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.financify.ExpenseWidget
 import com.example.financify.R
 import com.example.financify.databinding.FragmentStocksBinding
@@ -29,10 +20,9 @@ import com.example.financify.ui.stocks.stockDB.StockRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class StocksFragment : AppCompatActivity() {
-
+class StockActivity : AppCompatActivity() {
     private val STOCK_SEARCH_REQ_CODE = 101
-    private lateinit var listView :ListView
+    private lateinit var listView : ListView
 
     private var _binding: FragmentStocksBinding? = null
     private lateinit var arrayList: ArrayList<StockEntity>
@@ -49,17 +39,14 @@ class StocksFragment : AppCompatActivity() {
     companion object {
         val STOCK_VIEW_KEY = "stock_view"
     }
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_stocks)
+        setContentView(R.layout.activity_stock)
         database =StockDatabase.getInstance(this)
         dbDao =database.stockDatabaseDao
         repository = StockRepository(dbDao)
         vmFactory = StocksViewModelFactory(repository)
-        stocksViewModel =ViewModelProvider(this, vmFactory).get(StocksViewModel::class.java)
+        stocksViewModel = ViewModelProvider(this, vmFactory).get(StocksViewModel::class.java)
 
         stocksViewModel.stockList.observe(this, Observer { it->
             val appWidgetManager = AppWidgetManager.getInstance(this.applicationContext)
@@ -110,8 +97,4 @@ class StocksFragment : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
-
