@@ -34,15 +34,22 @@
         android:drawablePadding="8dp"
     />
 
-    <Button
-        android:id="@+id/editPurchaseButton"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm"/>
-
-    <Button
-        android:id="@+id/deletePurchaseButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Purchase"/>
+        android:layout_gravity="center">
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/deletePurchaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_delete" />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/editPurchaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_save" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 </LinearLayout>
