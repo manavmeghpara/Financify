@@ -145,6 +145,9 @@ class SavingActivity : AppCompatActivity() {
         dialogBuilder.setNegativeButton("Cancel") { _, _ ->
             // Do nothing, as the user canceled the edit
         }
+        dialogBuilder.setNeutralButton("Delete") { _, _ ->
+            savingsViewModel.delete(goal.name)
+        }
 
         val dialog = dialogBuilder.create()
         dialog.show()
