@@ -46,7 +46,6 @@
             android:layout_marginLeft="6dip"
             android:layout_marginRight="6dip"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/design_default_color_secondary"
             />
 
         <TextView
