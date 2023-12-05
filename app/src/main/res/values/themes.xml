@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/TextAppearance.Reply.Body1</item>
+        <item name="android:buttonStyle">@style/TextAppearance.Reply.Button</item>
     </style>
 
     <style name="Theme.Financify.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
