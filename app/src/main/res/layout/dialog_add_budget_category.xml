@@ -12,7 +12,7 @@
         android:text="Edit your budget categories"/>
 
     <!-- Category Name -->
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/editCategoryNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:id="@+id/deleteCategoryDialogButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ui_cancel" />
+            android:text="@string/ui_delete" />
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:id="@+id/editCategoryDialogButton"

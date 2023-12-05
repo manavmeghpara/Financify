@@ -1,24 +1,21 @@
 package com.example.financify.ui.budget
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.View.OnFocusChangeListener
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.infiniteRepeatable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.R
-import com.example.financify.databinding.FragmentBudgetBinding
 import com.example.financify.ui.budget.DBs.BudgetDatabase
 import com.example.financify.ui.budget.DBs.Category
 import com.example.financify.ui.budget.DBs.CategoryAdapter
@@ -99,11 +96,24 @@ class BudgetActivity: AppCompatActivity() {
 
     private fun showAddCategoryDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_budget_category, null)
-        val editCategoryNameEditText: EditText = dialogView.findViewById(R.id.editCategoryNameEditText)
+        val editCategoryAutoCompleteTextView: AutoCompleteTextView = dialogView.findViewById(R.id.editCategoryNameEditText)
         val editCategoryAmountEditText: EditText = dialogView.findViewById(R.id.editCategoryAmountEditText)
         val editCategoryDialogButton: Button = dialogView.findViewById(R.id.editCategoryDialogButton)
         val deleteCategoryDialogButton: Button = dialogView.findViewById(R.id.deleteCategoryDialogButton)
         deleteCategoryDialogButton.visibility = View.GONE
+
+        val autoCompleteOptions = arrayOf("Rent", "Transportation", "Food", "Utilities", "Insurance", "Saving", "Entertainment", "Other")
+        val autoCompleteAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, autoCompleteOptions)
+        editCategoryAutoCompleteTextView.setAdapter(autoCompleteAdapter)
+        editCategoryAutoCompleteTextView.threshold = 1
+
+        editCategoryAutoCompleteTextView.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                // Show dropdown when the view gains focus
+                editCategoryAutoCompleteTextView.showDropDown()
+            }
+        })
+        editCategoryAutoCompleteTextView.dropDownHeight = 500
 
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -111,8 +121,10 @@ class BudgetActivity: AppCompatActivity() {
 
         val dialog = dialogBuilder.show()
 
+
         editCategoryDialogButton.setOnClickListener {
-            val categoryName = editCategoryNameEditText.text.toString()
+            val categoryName = editCategoryAutoCompleteTextView.text.toString()
+
             val categoryAmount = editCategoryAmountEditText.text.toString()
 
             // Validate input and add the category
