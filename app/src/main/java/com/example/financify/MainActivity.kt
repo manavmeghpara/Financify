@@ -3,7 +3,9 @@ package com.example.financify
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
+import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -50,19 +52,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val toolbar: Toolbar = findViewById(R.id.topAppBar)
-        val logoutMenuItem = toolbar.menu.findItem(R.id.navigation_logout)
-        logoutMenuItem.setOnMenuItemClickListener {
-            // Check if selected menu item is the logout item
-            when (it.itemId) {
-                R.id.navigation_logout -> {
-                    logout()
-                    true
-                }
-                else -> false
-            }
-        }
-
         saving_btn = findViewById(R.id.savings_btn)
         saving_btn.setOnClickListener{
             val intent = Intent(this, SavingActivity::class.java)
@@ -97,16 +86,6 @@ class MainActivity : AppCompatActivity() {
             logout()
         }
 
-        //  menu pop-up button
-        val menu_btn: Button = findViewById(R.id.menu_budget)
-        // Initializing the popup menu and giving the reference as current context
-        menu_btn.setOnClickListener(){
-            val popupMenu: PopupMenu = PopupMenu(this, it, Gravity.FILL_VERTICAL)
-            val inflater: MenuInflater = popupMenu.menuInflater
-            inflater.inflate(R.menu.popup_menu, popupMenu.menu)
-            popupMenu.show()
-        }
-
     }
 
     private fun logout() {
@@ -114,5 +93,22 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Logout successfully!", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_app_bar_main, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_logout -> {
+                logout()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+
     }
 }
