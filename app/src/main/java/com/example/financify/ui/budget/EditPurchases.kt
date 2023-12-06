@@ -70,7 +70,7 @@ class EditPurchases : AppCompatActivity() {
         }
         val budgetButton: Button = findViewById(R.id.launch_budget)
         budgetButton.setOnClickListener() {
-            val intent = Intent(this, EditBudgetActivity::class.java)
+            val intent = Intent(this, BudgetActivity::class.java)
             this.finish()
 //            startActivity(intent)
 //            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()

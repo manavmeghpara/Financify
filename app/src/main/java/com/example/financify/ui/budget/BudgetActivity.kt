@@ -64,7 +64,7 @@ class BudgetActivity: AppCompatActivity() {
         viewModelFactory = CategoryViewModelFactory(repository)
         categoryViewModel = ViewModelProvider(this, viewModelFactory)[CategoryViewModel::class.java]
 
-        // Initialize empty adapter while waiting for
+        // Initialize empty adapter while waiting for DB
         categoryAdapter = CategoryAdapter(this, mutableListOf())
         categoryViewModel.allCategoriesLiveData.observe(this, Observer { categories ->
             categoryAdapter.updateData(categories)
@@ -72,17 +72,7 @@ class BudgetActivity: AppCompatActivity() {
         budgetListView.adapter = categoryAdapter
 
         addCategoryButton.setOnClickListener() {
-            supportFragmentManager.beginTransaction()
-                .add(com.example.financify.R.id.fragEditBudget, EditBudgetFragment()).commit()
-
-//            this.apply {
-//                var exitTransition = MaterialElevationScale(false).apply {
-//                    duration = resources.getInteger(com.example.financify.R.integer.reply_motion_duration_large).toLong()
-//                }
-//                var reenterTransition = MaterialElevationScale(true).apply {
-//                    duration = resources.getInteger(com.example.financify.R.integer.reply_motion_duration_large).toLong()
-//                }
-//            }
+            showAddCategoryDialog()
         }
 
         budgetListView.setOnItemClickListener { _, _, position, _ ->
@@ -128,7 +118,6 @@ class BudgetActivity: AppCompatActivity() {
 
             // Validate input and add the category
             if (categoryName.isNotEmpty() && categoryAmount.isNotEmpty()) {
-                // TODO: Check if unique name
                 if (true) {
                     val newCategory = Category(name=categoryName, amount=categoryAmount.toInt())
                     categoryViewModel.insertCategory(newCategory)
