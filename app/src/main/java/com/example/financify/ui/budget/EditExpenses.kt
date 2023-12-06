@@ -28,6 +28,8 @@ import com.example.financify.ui.budget.DBs.ExpenseRepository
 import com.example.financify.ui.budget.DBs.ExpenseViewModel
 import com.example.financify.ui.budget.DBs.ExpenseViewModelFactory
 import com.example.financify.ui.budget.DBs.ExpensesAdapter
+import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +38,7 @@ import kotlinx.coroutines.withContext
 
 class EditExpenses : AppCompatActivity() {
     private lateinit var expenseListView: ListView
-    private lateinit var addExpenseButton: Button
+    private lateinit var addExpenseButton: FloatingActionButton
     private lateinit var finishButton: Button
     private lateinit var expenseAdapter: ExpensesAdapter
 
@@ -60,7 +62,22 @@ class EditExpenses : AppCompatActivity() {
 
         expenseListView = findViewById(R.id.expenseListView)
         addExpenseButton = findViewById(R.id.addExpenseButton)
-        finishButton = findViewById(R.id.finishButton)
+//        finishButton = findViewById(R.id.finishButton)
+
+        val purchaseButton: Button = findViewById(R.id.launch_purchases)
+        purchaseButton.setOnClickListener() {
+            val intent = Intent(this, EditPurchases::class.java)
+            startActivity(intent)
+            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
+            this.finish()
+        }
+        val budgetButton: Button = findViewById(R.id.launch_budget)
+        budgetButton.setOnClickListener() {
+            val intent = Intent(this, EditBudgetActivity::class.java)
+            this.finish()
+//            startActivity(intent)
+//            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
+        }
 
         database = BudgetDatabase.getDatabase(this)
 
@@ -98,9 +115,9 @@ class EditExpenses : AppCompatActivity() {
             showAddExpenseDialog()
         }
 
-        finishButton.setOnClickListener {
-            finish()
-        }
+//        finishButton.setOnClickListener {
+//            finish()
+//        }
     }
 
     private fun showAddExpenseDialog() {
