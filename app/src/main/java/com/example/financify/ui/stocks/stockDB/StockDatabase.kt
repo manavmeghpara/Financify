@@ -10,7 +10,6 @@ abstract class StockDatabase : RoomDatabase(){
     abstract val stockDatabaseDao : StockDao
 
     companion object{
-
         @Volatile
         private var dbInstance: StockDatabase ?= null
 

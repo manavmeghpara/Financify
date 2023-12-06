@@ -57,7 +57,4 @@
         android:src="@drawable/ic_plus"
         android:layout_gravity="center|bottom"
         android:transitionName="@string/transition_budgetAddCategory"/>
-
-
-
 </LinearLayout>

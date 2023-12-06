@@ -10,7 +10,6 @@ import com.example.financify.ui.savings.savingsDB.GoalRepository
 import kotlinx.coroutines.launch
 
 class SavingsViewModel(private val repository: GoalRepository) : ViewModel() {
-
     val goalListLive : LiveData<List<GoalEntity>> = repository.allEntry.asLiveData()
 
     fun insert(entry: GoalEntity){

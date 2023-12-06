@@ -30,5 +30,4 @@ class StockRepository(private val stockDao: StockDao) {
             stockDao.deleteStock(key)
         }
     }
-
 }

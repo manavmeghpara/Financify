@@ -59,7 +59,6 @@ class EditPurchases : AppCompatActivity() {
 
         purchaseListView = findViewById(R.id.purchaseListView)
         addPurchaseButton = findViewById(R.id.addPurchaseButton)
-//        finishButton = findViewById(R.id.finishButton)
 
         val expenseButton: Button = findViewById(R.id.launch_expenses)
         expenseButton.setOnClickListener() {
@@ -70,10 +69,7 @@ class EditPurchases : AppCompatActivity() {
         }
         val budgetButton: Button = findViewById(R.id.launch_budget)
         budgetButton.setOnClickListener() {
-            val intent = Intent(this, BudgetActivity::class.java)
             this.finish()
-//            startActivity(intent)
-//            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
         }
 
         database = BudgetDatabase.getDatabase(this)
@@ -111,10 +107,6 @@ class EditPurchases : AppCompatActivity() {
         addPurchaseButton.setOnClickListener {
             showAddPurchaseDialog()
         }
-
-//        finishButton.setOnClickListener {
-//            finish()
-//        }
     }
 
     private fun showAddPurchaseDialog() {
@@ -182,7 +174,7 @@ class EditPurchases : AppCompatActivity() {
 
         val datePickerDialog = DatePickerDialog(
             this,
-            DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
+            { _, selectedYear, selectedMonth, selectedDay ->
                 dateTime.set(selectedYear, selectedMonth, selectedDay)
             },
             year,

@@ -33,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, "Sign in successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Sign in successful!", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -42,8 +42,7 @@ class SignInActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this, "Empty fields are not allowed!!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -52,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
         super.onStart()
 
         if(firebaseAuth.currentUser != null){
-            Toast.makeText(this, "Sign in successfully!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Sign in successful!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

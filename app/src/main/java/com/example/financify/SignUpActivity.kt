@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Toast.makeText(this, "Signed up successfully!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, SignInActivity::class.java)
                             startActivity(intent)
                         } else {
@@ -46,8 +46,7 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this, "Empty Fields are not allowed!!", Toast.LENGTH_SHORT).show()
             }
         }
     }

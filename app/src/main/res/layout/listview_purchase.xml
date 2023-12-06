@@ -58,6 +58,5 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/design_default_color_secondary"
             />
-
     </LinearLayout>
 </LinearLayout>

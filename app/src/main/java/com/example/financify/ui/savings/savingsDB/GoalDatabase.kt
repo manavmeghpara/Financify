@@ -18,7 +18,6 @@ abstract class GoalDatabase : RoomDatabase() {
     abstract val goalDatabaseDao: GoalDao
 
     companion object {
-
         @Volatile
         private var dbInstance: GoalDatabase? = null
 

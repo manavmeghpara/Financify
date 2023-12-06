@@ -11,14 +11,12 @@
         android:layout_height="wrap_content"
         android:text="Edit your budget categories"/>
 
-    <!-- Category Name -->
     <AutoCompleteTextView
         android:id="@+id/editCategoryNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Category Name"/>
 
-    <!-- Category Amount -->
     <EditText
         android:id="@+id/editCategoryAmountEditText"
         android:layout_width="match_parent"
@@ -45,5 +43,4 @@
             android:layout_height="wrap_content"
             android:text="@string/ui_save" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
-
 </LinearLayout>

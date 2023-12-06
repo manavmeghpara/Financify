@@ -28,5 +28,4 @@
         android:src="@drawable/ic_plus"
         app:backgroundTint="@color/white_50"
         app:fabSize="normal" />
-
 </RelativeLayout>

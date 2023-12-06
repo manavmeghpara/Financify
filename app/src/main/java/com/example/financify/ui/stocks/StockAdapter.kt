@@ -17,7 +17,7 @@ class StockAdapter(private val context: Context, private val stocks: List<StockE
     override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var itemView = View.inflate(context, R.layout.stock_adaptor_view, null)
+        var itemView = View.inflate(context, R.layout.stock_adapter_view, null)
         var symbol = itemView.findViewById<TextView>(R.id.textViewSymbol)
         var value =  itemView.findViewById<TextView>(R.id.textViewAmount)
 

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,15 +35,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class SavingActivity : AppCompatActivity() {
     private lateinit var goalListView: ListView
     private lateinit var arrayList: ArrayList<GoalEntity>
-    private lateinit var goalAdapter: GoalAdaptor
+    private lateinit var goalAdapter: GoalAdapter
 
     private lateinit var savingsViewModel: SavingsViewModel
     private lateinit var database: GoalDatabase
     private lateinit var dbDao: GoalDao
     private lateinit var repository: GoalRepository
     private lateinit var vmFactory: SavingsViewModelFactory
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +60,11 @@ class SavingActivity : AppCompatActivity() {
         savingsViewModel = ViewModelProvider(this, vmFactory).get(SavingsViewModel::class.java)
 
         arrayList = ArrayList()
-        goalAdapter = GoalAdaptor(this, arrayList)
+        goalAdapter = GoalAdapter(this, arrayList)
         goalListView.adapter = goalAdapter
 
         savingsViewModel.goalListLive.observe(this, Observer {it ->
-            goalAdapter = GoalAdaptor(this, it)
+            goalAdapter = GoalAdapter(this, it)
             goalListView.adapter = goalAdapter
             goalAdapter.notifyDataSetChanged()
         })

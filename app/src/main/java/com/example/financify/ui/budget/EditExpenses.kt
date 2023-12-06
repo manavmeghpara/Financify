@@ -39,7 +39,6 @@ import kotlinx.coroutines.withContext
 class EditExpenses : AppCompatActivity() {
     private lateinit var expenseListView: ListView
     private lateinit var addExpenseButton: FloatingActionButton
-    private lateinit var finishButton: Button
     private lateinit var expenseAdapter: ExpensesAdapter
 
     private lateinit var database: BudgetDatabase
@@ -62,7 +61,6 @@ class EditExpenses : AppCompatActivity() {
 
         expenseListView = findViewById(R.id.expenseListView)
         addExpenseButton = findViewById(R.id.addExpenseButton)
-//        finishButton = findViewById(R.id.finishButton)
 
         val purchaseButton: Button = findViewById(R.id.launch_purchases)
         purchaseButton.setOnClickListener() {
@@ -73,10 +71,7 @@ class EditExpenses : AppCompatActivity() {
         }
         val budgetButton: Button = findViewById(R.id.launch_budget)
         budgetButton.setOnClickListener() {
-            val intent = Intent(this, BudgetActivity::class.java)
             this.finish()
-//            startActivity(intent)
-//            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
         }
 
         database = BudgetDatabase.getDatabase(this)
@@ -114,10 +109,6 @@ class EditExpenses : AppCompatActivity() {
         addExpenseButton.setOnClickListener {
             showAddExpenseDialog()
         }
-
-//        finishButton.setOnClickListener {
-//            finish()
-//        }
     }
 
     private fun showAddExpenseDialog() {
@@ -209,6 +200,7 @@ class EditExpenses : AppCompatActivity() {
         }
 
         addReminderButton.setOnClickListener {
+            // Add a google calendar monthly recurring event
             val appName: String = getString(R.string.app_name)
 
             val intent = Intent(Intent.ACTION_INSERT)

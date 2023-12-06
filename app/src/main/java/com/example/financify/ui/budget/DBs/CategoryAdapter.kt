@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 class CategoryAdapter(
     context: Context,
-    private val categories: MutableList<Category> // Pair of ID and Name
+    private val categories: MutableList<Category>
 ) : ArrayAdapter<Category>(context, android.R.layout.simple_list_item_1, categories) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

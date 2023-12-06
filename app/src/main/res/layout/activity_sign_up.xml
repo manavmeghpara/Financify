@@ -7,7 +7,6 @@
     android:background="@drawable/signup_screen"
     tools:context=".SignUpActivity">
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
         style="@style/Theme.Financify"
@@ -70,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/passwordLayout"
         app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/confirmPassEt"
             style="@style/Theme.Financify"
             android:layout_width="match_parent"

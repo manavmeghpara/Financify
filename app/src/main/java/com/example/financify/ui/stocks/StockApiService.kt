@@ -2,20 +2,13 @@ package com.example.financify.ui.stocks
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import io.finnhub.api.apis.DefaultApi
 import io.finnhub.api.infrastructure.ApiClient
-import io.finnhub.api.infrastructure.RequestConfig
-import io.finnhub.api.models.CompanyProfile
 import io.finnhub.api.models.CompanyProfile2
 import io.finnhub.api.models.Quote
-import io.finnhub.api.models.StockCandles
-import io.finnhub.api.models.SymbolLookup
-import io.finnhub.api.models.SymbolLookupInfo
-import io.polygon.kotlin.sdk.rest.PolygonRestClient
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -24,8 +17,6 @@ import okhttp3.Response
 import okio.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
-
 
 object StockApiService {
     private const val API_KEY = "clckc1hr01qk5dvqpgngclckc1hr01qk5dvqpgo0"

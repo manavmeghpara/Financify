@@ -98,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         purchases = purchaseViewModel.allPurchasesLiveData.value
         expenses = expenseViewModel.allExpensesLiveData.value
 
-
         purchaseViewModel.allPurchasesLiveData.observe(this, Observer { it ->
             purchases = it
             calculateBudget()
@@ -116,54 +115,6 @@ class MainActivity : AppCompatActivity() {
             categories = it
             initBarChart()
         })
-
-//        val navView: BottomNavigationView = binding.navView
-//
-//        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-//        // Passing each menu ID as a set of Ids because each
-//        // menu should be considered as top level destinations.
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_budget, R.id.navigation_savings, R.id.navigation_stocks
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
-//
-//        saving_btn = findViewById(R.id.savings_btn)
-//        saving_btn.setOnClickListener{
-//            val intent = Intent(this, SavingActivity::class.java)
-//            startActivity(intent)
-//        }
-//        val button: Button = findViewById(R.id.launch_budget)
-//        button.setOnClickListener() {
-//            val intent = Intent(this, BudgetActivity::class.java)
-//            startActivity(intent)
-//        }
-//        val textView: TextView = binding.textDashboard
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-//        var expenseButton: Button = findViewById(R.id.launch_expenses)
-//        expenseButton.setOnClickListener() {
-//            val intent = Intent(this, EditExpenses::class.java)
-//            startActivity(intent)
-//        }
-//        var purchaseButton: Button = findViewById(R.id.launch_purchases)
-//        purchaseButton.setOnClickListener() {
-//            val intent = Intent(this, EditPurchases::class.java)
-//            startActivity(intent)
-//        }
-//        var visualizationButton: Button = findViewById(R.id.launch_visualization)
-//        visualizationButton.setOnClickListener() {
-//            val intent = Intent(this, VisualizeActivity::class.java)
-//            startActivity(intent)
-//        }
-//        var logoutButton: Button = findViewById(R.id.logout_btn)
-//        logoutButton.setOnClickListener() {
-//            logout()
-//        }
-
     }
 
 
@@ -188,7 +139,6 @@ class MainActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
-
     }
 
     fun openStocks(view: View) {
@@ -247,16 +197,16 @@ class MainActivity : AppCompatActivity() {
         pieChart.setEntryLabelColor(android.R.color.black)
         pieChart.setEntryLabelTextSize(20f)
 
-        //enabling the user to rotate the chart, default true
+        // Enabling the user to rotate the chart, default true
         pieChart.setRotationEnabled(true);
-        //adding friction when rotating the pie chart
+        // Adding friction when rotating the pie chart
         pieChart.setDragDecelerationFrictionCoef(0.9f)
-        //setting the first entry start from right hand side, default starting from top
+        // Setting the first entry start from right hand side, default starting from top
         pieChart.setRotationAngle(0F)
 
-        //highlight the entry when it is tapped, default true if not set
+        // Highlight the entry when it is tapped, default true if not set
         pieChart.setHighlightPerTapEnabled(true)
-        //adding animation so the entries pop up from 0 degree
+        // Adding animation so the entries pop up from 0 degree
         pieChart.animateY(1400, Easing.EaseInOutQuad);
 
         // Refresh the chart

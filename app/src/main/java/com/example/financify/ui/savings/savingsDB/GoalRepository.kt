@@ -1,7 +1,5 @@
 package com.example.financify.ui.savings.savingsDB
 
-import com.example.financify.ui.stocks.stockDB.StockDao
-import com.example.financify.ui.stocks.stockDB.StockEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

@@ -32,8 +32,6 @@ class StockActivity : AppCompatActivity() {
     private lateinit var repository: StockRepository
     private lateinit var vmFactory: StocksViewModelFactory
 
-
-    private val SHARED_PREF_LIST_KEY = "stock_list"
     companion object {
         val STOCK_VIEW_KEY = "stock_view"
     }
@@ -94,5 +92,4 @@ class StockActivity : AppCompatActivity() {
             stocksViewModel.insert(stock)
         }
     }
-
 }

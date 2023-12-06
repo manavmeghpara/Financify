@@ -149,7 +149,6 @@ class StockViewActivity : AppCompatActivity() {
         }
     }
 
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MediumTopAppBarExample(symbol: String) {
@@ -193,7 +192,6 @@ class StockViewActivity : AppCompatActivity() {
             },
         ) {}
     }
-
 
     private suspend fun fetchData(symbol: String): Quote? {
         return withContext(Dispatchers.IO) {

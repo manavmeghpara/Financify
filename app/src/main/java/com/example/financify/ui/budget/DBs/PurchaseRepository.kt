@@ -13,12 +13,6 @@ class PurchaseRepository(private val purchaseDao: PurchaseDao) {
         }
     }
 
-    fun updatePurchase(purchase: Purchase) {
-        CoroutineScope(IO).launch {
-            purchaseDao.updatePurchase(purchase)
-        }
-    }
-
     fun deletePurchase(purchaseId: Long) {
         CoroutineScope(IO).launch {
             purchaseDao.deletePurchase(purchaseId)

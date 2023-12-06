@@ -20,6 +20,4 @@ interface StockDao {
 
     @Query("DELETE FROM stocks WHERE symbol=:key")
     suspend fun deleteStock(key: String)
-
-
 }
