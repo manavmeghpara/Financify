@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:orientation="vertical">
-
         </LinearLayout>
     </ScrollView>
 
@@ -67,5 +66,13 @@
             android:onClick="openStocks"/>
     </com.nambimobile.widgets.efab.ExpandableFabLayout>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/logoutFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="30dp"
+        android:src="@drawable/baseline_logout_24"
+        android:transitionName="@string/transition_budgetAddCategory"/>
 </RelativeLayout>

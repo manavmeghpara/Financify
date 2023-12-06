@@ -41,12 +41,11 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var saving_btn: Button
-    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var expenseViewModel: ExpenseViewModel
@@ -66,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var budgetTotal: HashMap<String, Int>
     private lateinit var pieChart : PieChart
     private lateinit var barChart: LinearLayout
+    private lateinit var logoutFab: FloatingActionButton
     private var categories: List<Category>? = null
     private var expenses: List<Expense>? = null
     private var purchases: List<Purchase>? = null
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
         pieChart = findViewById(R.id.pieChartMain)
         barChart = findViewById(R.id.horizontal_barchartMain)
+        logoutFab = findViewById(R.id.logoutFab)
 
         database = BudgetDatabase.getDatabase(this)
         expenseDao = database.expenseDao()
@@ -115,12 +116,15 @@ class MainActivity : AppCompatActivity() {
             categories = it
             initBarChart()
         })
-    }
 
+        logoutFab.setOnClickListener {
+            logout()
+        }
+    }
 
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
-        Toast.makeText(this, "Logout successfully!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Logout successful!", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }
