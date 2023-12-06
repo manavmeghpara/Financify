@@ -41,8 +41,6 @@ class BudgetActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget)
-        val budgetViewModel =
-            ViewModelProvider(this)[BudgetViewModel::class.java]
 
         val expenseButton: Button = findViewById(R.id.launch_expenses)
         expenseButton.setOnClickListener() {

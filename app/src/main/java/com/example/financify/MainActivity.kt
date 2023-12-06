@@ -2,31 +2,20 @@ package com.example.financify
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.financify.databinding.ActivityMainBinding
-import com.example.financify.databinding.FragmentDashboardBinding
 import com.example.financify.ui.budget.BudgetActivity
-import com.example.financify.ui.budget.BudgetFragment
 import com.example.financify.ui.budget.DBs.BudgetDatabase
 import com.example.financify.ui.budget.DBs.Category
 import com.example.financify.ui.budget.DBs.CategoryDao
@@ -43,14 +32,8 @@ import com.example.financify.ui.budget.DBs.PurchaseDao
 import com.example.financify.ui.budget.DBs.PurchaseRepository
 import com.example.financify.ui.budget.DBs.PurchaseViewModel
 import com.example.financify.ui.budget.DBs.PurchaseViewModelFactory
-import com.example.financify.ui.budget.EditBudgetActivity
-import com.example.financify.ui.budget.EditExpenses
-import com.example.financify.ui.budget.EditPurchases
 import com.example.financify.ui.savings.SavingActivity
-import com.example.financify.ui.savings.SavingsFragment
 import com.example.financify.ui.stocks.StockActivity
-import com.example.financify.ui.stocks.StocksFragment
-import com.example.financify.ui.visualization.VisualizeActivity
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -63,7 +46,6 @@ import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var saving_btn: Button
-    private var _binding: FragmentDashboardBinding? = null
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
 

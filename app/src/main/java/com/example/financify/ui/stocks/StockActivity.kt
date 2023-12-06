@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.financify.ExpenseWidget
 import com.example.financify.R
-import com.example.financify.databinding.FragmentStocksBinding
 import com.example.financify.ui.stocks.stockDB.StockDao
 import com.example.financify.ui.stocks.stockDB.StockDatabase
 import com.example.financify.ui.stocks.stockDB.StockEntity
@@ -24,7 +23,6 @@ class StockActivity : AppCompatActivity() {
     private val STOCK_SEARCH_REQ_CODE = 101
     private lateinit var listView : ListView
 
-    private var _binding: FragmentStocksBinding? = null
     private lateinit var arrayList: ArrayList<StockEntity>
     private lateinit var stkAdaptor: StockAdapter
     private lateinit var stocksViewModel: StocksViewModel

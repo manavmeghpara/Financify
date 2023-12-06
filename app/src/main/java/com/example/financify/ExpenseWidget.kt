@@ -9,36 +9,11 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
-import androidx.datastore.dataStore
-import androidx.glance.Button
-import androidx.glance.GlanceModifier
-import androidx.glance.action.actionStartActivity
-import androidx.glance.layout.Alignment
-import androidx.glance.layout.Column
-import androidx.glance.layout.Row
-import androidx.glance.layout.fillMaxSize
-import androidx.glance.layout.padding
-import androidx.glance.text.Text
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
-import com.example.financify.ui.stocks.StockApiService
-import com.example.financify.ui.stocks.StocksFragment
-import com.example.financify.ui.stocks.StocksViewModel
-import com.example.financify.ui.stocks.StocksViewModelFactory
 import com.example.financify.ui.stocks.stockDB.StockDao
 import com.example.financify.ui.stocks.stockDB.StockDatabase
 import com.example.financify.ui.stocks.stockDB.StockEntity
 import com.example.financify.ui.stocks.stockDB.StockRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.xml.transform.Transformer
 
 /**
  * Implementation of App Widget functionality.
@@ -96,23 +71,15 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-//    val addIntent = Intent()
-//    val addPendingIntent = PendingIntent.getBroadcast(context, 0, addIntent,
-//        PendingIntent.FLAG_IMMUTABLE)
-
     val serviceIntent = Intent(context, MyRemoteView::class.java)
     serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
     serviceIntent.data = Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME))
 
-//    val intent = Intent(context, StocksFragment::class.java)
-//    val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     val views = RemoteViews(context.packageName, R.layout.expense_widget)
     views.setRemoteAdapter(R.id.widget_listview, serviceIntent)
     views.setEmptyView(R.id.widget_listview,R.id.widget_empty_view)
     // Construct the RemoteViews object
-
     appWidgetManager.updateAppWidget(appWidgetId, views)
-
 }
 
 class MyRemoteView: RemoteViewsService(){
