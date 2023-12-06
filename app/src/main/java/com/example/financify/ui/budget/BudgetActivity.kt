@@ -72,16 +72,17 @@ class BudgetActivity: AppCompatActivity() {
         budgetListView.adapter = categoryAdapter
 
         addCategoryButton.setOnClickListener() {
+            supportFragmentManager.beginTransaction()
+                .add(com.example.financify.R.id.fragEditBudget, EditBudgetFragment()).commit()
 
-            this.apply {
-                showAddCategoryDialog()
-                var exitTransition = MaterialElevationScale(false).apply {
-                    duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-                }
-                var reenterTransition = MaterialElevationScale(true).apply {
-                    duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
-                }
-            }
+//            this.apply {
+//                var exitTransition = MaterialElevationScale(false).apply {
+//                    duration = resources.getInteger(com.example.financify.R.integer.reply_motion_duration_large).toLong()
+//                }
+//                var reenterTransition = MaterialElevationScale(true).apply {
+//                    duration = resources.getInteger(com.example.financify.R.integer.reply_motion_duration_large).toLong()
+//                }
+//            }
         }
 
         budgetListView.setOnItemClickListener { _, _, position, _ ->

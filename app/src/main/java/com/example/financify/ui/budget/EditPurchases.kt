@@ -1,6 +1,7 @@
 package com.example.financify.ui.budget
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,10 +29,12 @@ import com.example.financify.ui.budget.DBs.PurchaseRepository
 import com.example.financify.ui.budget.DBs.PurchaseViewModel
 import com.example.financify.ui.budget.DBs.PurchaseViewModelFactory
 import com.example.financify.ui.budget.DBs.PurchasesAdapter
+import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class EditPurchases : AppCompatActivity() {
     private lateinit var purchaseListView: ListView
-    private lateinit var addPurchaseButton: Button
+    private lateinit var addPurchaseButton: FloatingActionButton
     private lateinit var finishButton: Button
     private lateinit var purchaseAdapter: PurchasesAdapter
 
@@ -56,7 +59,22 @@ class EditPurchases : AppCompatActivity() {
 
         purchaseListView = findViewById(R.id.purchaseListView)
         addPurchaseButton = findViewById(R.id.addPurchaseButton)
-        finishButton = findViewById(R.id.finishButton)
+//        finishButton = findViewById(R.id.finishButton)
+
+        val expenseButton: Button = findViewById(R.id.launch_expenses)
+        expenseButton.setOnClickListener() {
+            val intent = Intent(this, EditExpenses::class.java)
+            startActivity(intent)
+            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
+            this.finish()
+        }
+        val budgetButton: Button = findViewById(R.id.launch_budget)
+        budgetButton.setOnClickListener() {
+            val intent = Intent(this, EditBudgetActivity::class.java)
+            this.finish()
+//            startActivity(intent)
+//            findViewById<MaterialButtonToggleGroup>(R.id.toggleButton).clearChecked()
+        }
 
         database = BudgetDatabase.getDatabase(this)
 
@@ -94,9 +112,9 @@ class EditPurchases : AppCompatActivity() {
             showAddPurchaseDialog()
         }
 
-        finishButton.setOnClickListener {
-            finish()
-        }
+//        finishButton.setOnClickListener {
+//            finish()
+//        }
     }
 
     private fun showAddPurchaseDialog() {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/fragEditBudget"
+    tools:context=".ui.budget.EditBudgetFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editPurchaseNameEditText"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:hint="Purchase name" />
+        <Spinner
+            android:id="@+id/eitCategorySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editPurchaseAmountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Amount"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_budget_text_date"
+            android:layout_width="299dp"
+            android:layout_height="wrap_content"
+            android:hint="AUTO INPUT TODAYS DATE HERE"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/edit_budget_btn_date"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawablePadding="8dp"
+            android:text="Date"
+            android:textSize="1dp"
+            app:icon="@drawable/baseline_calendar_month_24" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/edit_budget_btn_cancel"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_cancel" />
+
+        <Button
+            android:id="@+id/edit_budget_btn_confirm"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_save" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+</LinearLayout>

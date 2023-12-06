@@ -25,5 +25,4 @@
         android:layout_toRightOf="@android:id/text1"
         android:textAppearance="?android:attr/textAppearanceLarge"
         />
-
 </LinearLayout>
