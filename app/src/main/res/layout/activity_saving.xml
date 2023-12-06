@@ -26,6 +26,5 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_plus"
-        app:backgroundTint="@color/white_50"
         app:fabSize="normal" />
 </RelativeLayout>
